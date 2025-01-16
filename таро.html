@@ -1,0 +1,416 @@
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Гадание на картах Таро онлайн | Предсказания и расклады на будущее</title>
+    
+    <!-- Мета-теги для SEO -->
+    <meta name="description" content="Бесплатное онлайн гадание на картах Таро. Узнайте свое будущее, получите ответы на важные вопросы и раскройте тайны судьбы с помощью точных предсказаний.">
+    <meta name="keywords" content="таро онлайн, гадание на картах таро, расклад таро, предсказание будущего, онлайн гадание, карты таро значение">
+    
+    <!-- Канонический URL -->
+    <link rel="canonical" href="https://ваш-домен.ru/таро.html">
+    
+    <!-- OpenGraph разметка -->
+    <meta property="og:title" content="Гадание на картах Таро онлайн | Предсказания и расклады на будущее">
+    <meta property="og:description" content="Бесплатное онлайн гадание на картах Таро. Узнайте свое будущее, получите ответы на важные вопросы и раскройте тайны судьбы с помощью точных предсказаний.">
+    <meta property="og:image" content="https://ваш-домен.ru/images/tarot-cards.jpg">
+    <meta property="og:url" content="https://ваш-домен.ru/таро.html">
+    <meta property="og:type" content="website">
+    
+    <!-- Иконка сайта -->
+    <link rel="icon" href="https://i.ibb.co/stYNTsb/Pentagram-with-one-point-up.png" type="image/png" />
+        <!-- Yandex.RTB -->
+    <script>window.yaContextCb=window.yaContextCb||[]</script>
+    <script src="https://yandex.ru/ads/system/context.js" async></script>
+
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: black;
+            color: #fff;
+            overflow-x: hidden;
+            overflow-y: auto;
+            min-height: 100vh;
+        }
+
+        #starCanvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+        }
+
+        .nav-menu {
+            position: relative;
+            display: flex;
+            justify-content: center;
+            margin: 20px 0;
+        }
+
+        .nav-button {
+            padding: 15px 30px;
+            font-size: 1.2em;
+            background: linear-gradient(45deg, #ff00de, #00ffff);
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin: 10px;
+            box-shadow: 0 0 10px rgba(255, 0, 222, 0.5), 0 0 10px rgba(0, 255, 255, 0.5);
+            transition: background 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .nav-button:hover {
+            background: linear-gradient(45deg, #00ffff, #ff00de);
+            box-shadow: 0 0 20px rgba(255, 0, 222, 0.7), 0 0 20px rgba(0, 255, 255, 0.7);
+        }
+
+        .indicator {
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            height: 4px;
+            background-color: #00ffff;
+            transition: left 0.3s, width 0.3s;
+            width: 100%;
+        }
+
+        .button {
+            padding: 15px 30px;
+            font-size: 1.2em;
+            background: linear-gradient(45deg, #ff00de, #00ffff);
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 10px;
+            box-shadow: 0 0 10px rgba(255, 0, 222, 0.5), 0 0 10px rgba(0, 255, 255, 0.5);
+            transition: background 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .button:hover {
+            background: linear-gradient(45deg, #00ffff, #ff00de);
+            box-shadow: 0 0 20px rgba(255, 0, 222, 0.7), 0 0 20px rgba(0, 255, 255, 0.7);
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0, 0, 0, 0.8);
+        }
+
+        .modal-content {
+            background-color: rgba(0, 0, 0, 0.9);
+            margin: 15% auto;
+            padding: 20px;
+            border: 1px solid #00ffff;
+            width: 80%;
+            max-width: 600px;
+            border-radius: 10px;
+            text-align: left;
+        }
+
+        .close {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+        }
+
+        .close:hover,
+        .close:focus {
+            color: #fff;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        .description {
+            margin-top: 10px;
+            font-size: 1em;
+            color: #ccc;
+            text-shadow: 0 0 5px #00ffff;
+        }
+
+        h1 {
+            font-size: 3em;
+            text-shadow: 0 0 10px #ff00de, 0 0 20px #ff00de, 0 0 30px #ff00de;
+            color: #ff00de;
+        }
+
+        p {
+            font-size: 1.2em;
+            text-shadow: 0 0 5px #00ffff, 0 0 10px #00ffff;
+            color: #00ffff;
+        }
+
+        h2 {
+            font-size: 2em;
+            text-shadow: 0 0 5px #ff00de, 0 0 10px #00ffff;
+        }
+
+        .banner {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background-color: #ff00de;
+            color: white;
+            text-align: center;
+            padding: 10px 0;
+            z-index: 10000;
+            overflow: hidden;
+        }
+
+        .banner-text {
+            display: inline-block;
+            white-space: nowrap;
+            animation: scroll-left 10s linear infinite;
+        }
+
+        @keyframes scroll-left {
+            from {
+                transform: translateX(100%);
+            }
+            to {
+                transform: translateX(-100%);
+            }
+        }
+
+        .content {
+            position: relative;
+            z-index: 1;
+            padding-top: 50px;
+            padding-bottom: 20px;
+            overflow-y: auto;
+            max-width: 1200px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        /* Стили для мобильных устройств */
+        @media (max-width: 768px) {
+            .content {
+                padding: 60px 15px 20px;
+            }
+            
+            .nav-menu {
+                flex-wrap: wrap;
+            }
+            
+            .nav-button {
+                margin: 5px;
+                padding: 10px 20px;
+            }
+        }
+
+        main {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 0 20px;
+            text-align: center;
+        }
+
+        .tarot-introduction {
+            margin: 30px auto;
+            text-align: center;
+        }
+
+        .tarot-types {
+            margin: 30px auto;
+            text-align: center;
+        }
+
+        .tarot-types ul {
+            list-style: none;
+            padding: 0;
+            margin: 20px auto;
+            display: inline-block;
+            text-align: left;
+        }
+
+        header {
+            text-align: center;
+            margin: 30px auto;
+        }
+    </style>
+</head>
+
+<body>
+    <canvas id="starCanvas"></canvas>
+    <nav class="nav-menu">                                                                                          
+        <button class="nav-button" onclick="window.location.href='нумерология_онлайн.html'">Нумерология</button>
+        <button class="nav-button" onclick="window.location.href='руны.html'">Руны</button>
+        <button class="nav-button" onclick="window.location.href='таро.html'">Таро</button>
+        <button class="nav-button" onclick="window.location.href='толкования_сонников.html'">Толкования сонников</button>        
+    </nav>
+
+    <header>
+       
+    <main>
+        <section class="tarot-introduction">
+            <p>Карты Таро - древний инструмент предсказания, помогающий раскрыть тайны прошлого, понять настоящее и заглянуть в будущее. Каждая карта несет в себе глубокий символизм и может дать ценные подсказки для принятия важных решений в жизни.</p>
+            
+            <p>Наше онлайн гадание на картах Таро поможет вам получить ответы на волнующие вопросы о любви, карьере, финансах и других сферах жизни. Выберите расклад, сконцентрируйтесь на своем вопросе, и карты раскроют перед вами свои тайны.</p>
+            
+            <p>Помните, что карты Таро - это не только инструмент предсказания, но и мощное средство для самопознания и личностного роста. Они помогают увидеть ситуацию с разных сторон и принять взвешенное решение.</p>
+        </section>
+        
+        <button class="button" onclick="openModal('tarotModal')">Гадание на картах Таро</button>
+        
+        <section class="tarot-types">
+            <h2>Виды раскладов Таро</h2>
+            <p>Мы предлагаем различные виды раскладов, каждый из которых подходит для определенных жизненных ситуаций:</p>
+            <ul>
+                <li>Расклад на ближайшее будущее</li>
+                <li>Расклад на отношения</li>
+                <li>Карьерный расклад</li>
+                <li>Финансовый прогноз</li>
+                <li>Расклад на самопознание</li>
+            </ul>
+        </section>
+    </main>
+
+    <!-- Модальное окно для Таро -->
+    <div id="tarotModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal('tarotModal')">&times;</span>
+            <h2>Гадание на картах Таро</h2>
+            <div class="description">
+                Карты Таро это инструмент для пресказания будущего и анализа настоящего. Каждая карта имеет свое значене и символику, которые помогают раскрыть тайны вашей жизни.
+            </div>
+            <button class="button" onclick="drawTarotCard()">Вытянуть карту</button>
+            <div id="tarotResult" class="result"></div>
+        </div>
+    </div>
+
+    <!-- Yandex.RTB R-A-12357042-1 -->
+    <div id="yandex_rtb_R-A-12357042-1"></div>
+    <script>
+        window.yaContextCb.push(() => {
+            Ya.Context.AdvManager.render({
+                "blockId": "R-A-12357042-1",
+                "renderTo": "yandex_rtb_R-A-12357042-1",
+                "type": "feed"
+            })
+        });
+    </script>
+
+    <footer>
+        <p>&copy; 2024 Таро Онлайн. Все права защищены.</p>
+    </footer>
+
+    <script>
+        function openModal(modalId) {
+            document.getElementById(modalId).style.display = "block";
+        }
+
+        function closeModal(modalId) {
+            document.getElementById(modalId).style.display = "none";
+        }
+
+        function drawTarotCard() {
+            const tarotDeck = {
+                "Шут": "Шут символизирует овые начинания, спонтанность и свободу. Это карта, которая побуждает вас следовать за своими мечтами и не бояться неизвестного.",
+                "аг": "Маг представляет собой силу воли, мастерство и способность к реализации. Эта карта говорит о том, что у вас есть все необходимые ресурсы для достижения ваших целей.",
+                "Верховная Жрица": "Верховная Жрица символизирует интуицию, тайные знания и внутреннюю мудрость. Она призывает вас доверять своим инстинктам и искать ответы внутри себя.",
+                "Императрица": "Императрица олицетворяет плодородие, изобилие и заботу. Эта карта говорит о том, что сейчас благоприятное время для творчества и роста.",
+                "Император": "Император символизирует власть, структуру и стабильность. Он напоминает вам о важности дисциплины и порядка в вашей жизни."
+            };
+            const randomCard = Object.keys(tarotDeck)[Math.floor(Math.random() * Object.keys(tarotDeck).length)];
+            document.getElementById('tarotResult').innerHTML = `<strong>Ваша карта:</strong> ${randomCard}<br>${tarotDeck[randomCard]}`;
+        }
+
+        const navButtons = document.querySelectorAll('.nav-button');
+        const indicator = document.querySelector('.indicator');
+ 
+        navButtons.forEach(button => {
+            button.addEventListener('mouseenter', () => {
+                indicator.style.left = button.offsetLeft + 'px';
+                indicator.style.width = button.offsetWidth + 'px';
+            });
+        });
+    </script>
+
+    <div class="banner">
+        <a href="prize.html" class="banner-text" style="color: white; text-decoration: none;">
+            Бонус!
+        </a>
+    </div>
+    <div class="content">
+        <!-- Ваше основное содержимое здесь -->
+        ...
+    </div>
+
+    <script>
+        const canvas = document.getElementById('starCanvas');
+        const ctx = canvas.getContext('2d');
+
+        function resizeCanvas() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        }
+        resizeCanvas();
+        window.addEventListener('resize', resizeCanvas);
+
+        const stars = [];
+
+        function createStars() {
+            const starCount = window.innerWidth < 600 ? 100 : 200;
+            for (let i = 0; i < starCount; i++) {
+                stars.push({
+                    x: Math.random() * canvas.width,
+                    y: Math.random() * canvas.height,
+                    radius: Math.random() * 2 + 1,
+                    speed: Math.random() * 0.5 + 0.1,
+                    direction: Math.random() * 2 * Math.PI,
+                    alpha: Math.random() * 0.5 + 0.5
+                });
+            }
+        }
+
+        function updateStars() {
+            for (let star of stars) {
+                star.x += Math.cos(star.direction) * star.speed;
+                star.y += Math.sin(star.direction) * star.speed;
+
+                if (star.x > canvas.width || star.x < 0 || star.y > canvas.height || star.y < 0) {
+                    star.x = Math.random() * canvas.width;
+                    star.y = Math.random() * canvas.height;
+                }
+            }
+        }
+
+        function drawStars() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            for (let star of stars) {
+                ctx.beginPath();
+                ctx.arc(star.x, star.y, star.radius, 0, Math.PI * 2);
+                ctx.fillStyle = `rgba(255, 255, 255, ${star.alpha})`;
+                ctx.fill();
+            }
+        }
+
+        function animateStars() {
+            updateStars();
+            drawStars();
+            requestAnimationFrame(animateStars);
+        }
+
+        createStars();
+        animateStars();
+    </script>
+</body>
+
+</html>
+

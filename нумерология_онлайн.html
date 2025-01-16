@@ -1,0 +1,443 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Нумерология онлайн | Расчет числа судьбы и жизненного пути | Персональный анализ</title>
+    
+    <!-- Мета-теги для SEO -->
+    <meta name="description" content="Бесплатный расчет нумерологии онлайн. Узнайте свое число судьбы, жизненный путь и скрытые таланты. Профессиональный нумерологический анализ личности по дате рождения.">
+    <meta name="keywords" content="нумерология онлайн, расчет числа судьбы, нумерологический анализ, число жизненного пути, нумерология по дате рождения">
+    
+    <!-- Канонический URL -->
+    <link rel="canonical" href="https://ваш-домен.ru/нумерология_онлайн.html">
+    
+    <!-- OpenGraph разметка -->
+    <meta property="og:title" content="Нумерология онлайн | Расчет числа судьбы и жизненного пути">
+    <meta property="og:description" content="Бесплатный расчет нумерологии онлайн. Узнайте свое число судьбы, жизненный путь и скрытые таланты.">
+    <meta property="og:image" content="https://ваш-домен.ru/images/numerology.jpg">
+    <meta property="og:url" content="https://ваш-домен.ru/нумерология_онлайн.html">
+    <meta property="og:type" content="website">
+    
+    <!-- Иконка сайта -->
+    <link rel="icon" href="https://i.ibb.co/stYNTsb/Pentagram-with-one-point-up.png" type="image/png" />
+
+    <!-- Yandex.RTB -->
+    <script>window.yaContextCb=window.yaContextCb||[]</script>
+    <script src="https://yandex.ru/ads/system/context.js" async></script>
+        
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: black; /* Черный фон */
+            color: #fff;
+            overflow-x: hidden; /* Скрыть горизонтальную прокрутку */
+            overflow-y: auto; /* Разрешить вертикальную прокрутку */
+        }
+
+        #starCanvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1; /* Канвас под контентом */
+        }
+
+        .button, .nav-button {
+            padding: 15px 30px;
+            font-size: 1.2em;
+            background: linear-gradient(45deg, #ff00de, #00ffff);
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin: 10px;
+            box-shadow: 0 0 10px rgba(255, 0, 222, 0.5), 0 0 10px rgba(0, 255, 255, 0.5);
+            transition: background 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .button:hover, .nav-button:hover {
+            background: linear-gradient(45deg, #00ffff, #ff00de);
+            box-shadow: 0 0 20px rgba(255, 0, 222, 0.7), 0 0 20px rgba(0, 255, 255, 0.7);
+        }
+
+        h1 {
+            font-size: 3em;
+            text-shadow: 0 0 10px #ff00de, 0 0 20px #ff00de, 0 0 30px #ff00de;
+            color: #ff00de;
+        }
+
+        p {
+            font-size: 1.2em;
+            text-shadow: 0 0 5px #00ffff, 0 0 10px #00ffff;
+            color: #00ffff;
+        }
+
+        .content {
+            padding-top: 50px;
+            text-align: center;
+        }
+
+        .analysis-section {
+            margin-top: 20px;
+            text-align: center;
+        }
+
+        .analysis-section input {
+            padding: 10px;
+            font-size: 1em;
+            border-radius: 5px;
+            border: 1px solid #00ffff;
+            background-color: rgba(0, 0, 0, 0.5);
+            color: #fff;
+        }
+
+        .result {
+            margin-top: 20px;
+            padding: 10px;
+            background-color: rgba(0, 0, 0, 0.5);
+            border-radius: 5px;
+            color: #fff;
+        }
+
+        .nav-bar {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .dropdown {
+            display: inline-block;
+            position: relative;
+        }
+
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: #333;
+            min-width: 160px;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+            z-index: 1;
+        }
+
+        .dropdown-content a {
+            color: #fff;
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+        }
+
+        .dropdown-content a:hover {
+            background-color: #555;
+        }
+
+        .dropdown:hover .dropdown-content {
+            display: block;
+        }
+    </style>
+</head>
+<body>
+    <!-- Всплывающее уведомление -->
+    <div id="popup" style="display: none; position: fixed; top: 20px; left: 50%; transform: translateX(-50%); background-color: #333; color: #fff; border: 1px solid #444; padding: 15px; box-shadow: 0 0 10px rgba(0, 0, 0, 0.5); border-radius: 5px; z-index: 1000;">
+        <p>Привет! Я ваш виртуальный помощник. Нужна помощь?</p>
+        <button onclick="closePopup()" style="background-color: #555; color: #fff; border: none; padding: 10px; border-radius: 5px; cursor: pointer;">Закрыть</button>
+        <div style="margin-top: 10px; text-align: center;">
+            <a href="#" onclick="openBot()" style="color: #00ffff; text-decoration: none;">Связаться с ботом</a>
+        </div>
+    </div>
+
+    <!-- Изображение на загрузку страницы без ссылки -->
+    <div id="loadingImage" style="position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); background-color: transparent; z-index: 1000;">
+        <img src="https://i.ibb.co/5YrrRrz/photo-2024-10-23-15-21-20.jpg" alt="photo-2024-10-23-15-21-20" border="0" style="width: 100%; max-width: 480px; height: auto; display: block; border: none;">
+    </div>
+    <canvas id="starCanvas"></canvas>
+    <div class="nav-bar">
+        <button class="nav-button" onclick="window.location.href='нумерология_онлайн.html'">Нумерология</button>
+        <button class="nav-button" onclick="window.location.href='руны.html'">Руны</button>
+        <button class="nav-button" onclick="window.location.href='таро.html'">Таро</button>
+        <button class="nav-button" onclick="window.location.href='толкования_сонников.html'">Толкования сонников</button>        <div class="dropdown">
+            <button class="nav-button">Мои новые проекты</button>
+            <div class="dropdown-content">
+                <a href="Meta%20Chubuk03%20-%20Музыкальный%20Дистрибьютор.html">Meta Chubuk03 - Музыкальный Дистрибьютор</a>
+                <!-- Добавьте другие проекты здесь -->
+            </div>
+        </div>
+    </div>
+    <div class="content">
+        <h1>Нумерология Онлайн</h1>
+        
+        <section class="introduction">
+            <p>Нумерология - древняя наука о числах, которая помогает раскрыть тайны вашей личности, судьбы и жизненного пути. Каждое число несет в себе особую вибрацию и энергетику, влияющую на различные аспекты жизни.</p>
+            
+            <p>С помощью нашего онлайн калькулятора вы сможете рассчитать свои ключевые числа и получить подробную интерпретацию их значений. Узнайте, какие таланты и способности заложены в вас от рождения, какие препятствия могут встретиться на пути и как их преодолеть.</p>
+        </section>
+
+        <section class="numerology-types">
+            <h2>Виды нумерологических расчетов</h2>
+            <div class="numerology-grid">
+                <div class="numerology-item">
+                    <h3>Число жизненного пути</h3>
+                    <p>Определяет вашу основную жизненную миссию и предназначение. Это число показывает, какие таланты и способности вам следует развивать для достижения успеха.</p>
+                </div>
+                
+                <div class="numerology-item">
+                    <h3>Число души</h3>
+                    <p>Раскрывает ваши внутренние желания, стремления и истинные мотивы. Помогает понять, что действительно важно для вашей души.</p>
+                </div>
+                
+                <div class="numerology-item">
+                    <h3>Число личности</h3>
+                    <p>Показывает, как вас воспринимают окружающие и какое впечатление вы производите на людей при первой встрече.</p>
+                </div>
+            </div>
+        </section>
+
+        <div class="analysis-section">
+            <input type="date" id="birthDate">
+            <button id="analyzePersonality" class="button">Анализировать Личность</button>
+            <button id="calculateNumber" class="button">Рассчитать Число Судьбы</button>
+            <div id="analysisResult" class="result"></div>
+            <div id="numerologyResult" class="result"></div>
+        </div>
+    </div>
+
+    <script>
+        function showPopup() {
+            const popup = document.getElementById('popup');
+            popup.style.display = 'block';
+        }
+
+        function closePopup() {
+            const popup = document.getElementById('popup');
+            popup.style.display = 'none';
+        }
+
+        function openBot() {
+            // Логика для открытия чата с ботом
+            alert('Бот находится снизу');
+        }
+
+        window.onload = function() {
+            // Показать уведомление через 5 секунд после загрузки страницы
+            setTimeout(showPopup, 5000);
+
+            // Скрыть изображение через 1 секунду после загрузки страницы
+            setTimeout(function() {
+                const loadingImage = document.getElementById('loadingImage');
+                if (loadingImage) {
+                    loadingImage.style.display = 'none';
+                }
+            }, 1000); // 1000 миллисекунд = 1 секунда
+        };
+    </script>
+
+    <!-- Рекламные блоки Яндекс внизу страницы -->
+    <div id="yandex_rtb_R-A-12356702-1"></div>
+    <script>
+    window.yaContextCb.push(() => {
+        Ya.Context.AdvManager.render({
+            "blockId": "R-A-12356702-1",
+            "renderTo": "yandex_rtb_R-A-12356702-1"
+        })
+    })
+    </script>
+
+    <script>
+    window.yaContextCb.push(() => {
+        Ya.Context.AdvManager.render({
+            "blockId": "R-A-12356702-2",
+            "type": "topAd"
+        })
+    })
+    </script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            // Логика для анализа личности
+            document.getElementById('analyzePersonality').onclick = function () {
+                const birthDate = document.getElementById('birthDate').value;
+                const analysisResult = document.getElementById('analysisResult');
+                if (birthDate) {
+                    const [year, month, day] = birthDate.split('-').map(Number);
+                    const consciousnessNumber = reduceToSingleDigit(day);
+                    const actionNumber = reduceToSingleDigit(month);
+                    const realizationNumber = reduceToSingleDigit(year);
+
+                    const characteristics = {
+                        1: "Лидерство, независимось, индивидуальность",
+                        2: "Сотрудничество, дипломатия, чувствительность",
+                        3: "Творчество, общительнсть, оптимизм",
+                        4: "Практичность, стабильность, трудолюбие",
+                        5: "Свобода, приключения, адаптивность",
+                        6: "Ответственность, забота, гармония",
+                        7: "Аналитичность, духовность, интроспекция",
+                        8: "Материальный успех, власть, амбиции",
+                        9: "Сострадание, гуманизм, щедрость"
+                    };
+
+                    analysisResult.innerHTML = `
+                        <h3>Ваш анализ:</h3>
+                        <p>Число сознания: ${consciousnessNumber} - ${characteristics[consciousnessNumber]}</p>
+                        <p>Число действия: ${actionNumber} - ${characteristics[actionNumber]}</p>
+                        <p>Число реализации: ${realizationNumber} - ${characteristics[realizationNumber]}</p>
+                    `;
+                } else {
+                    analysisResult.textContent = 'Пожалуйста, введите дату рождения';
+                }
+            };
+
+            // Логика для расчета числа судьбы
+            document.getElementById('calculateNumber').onclick = function () {
+                const birthDate = document.getElementById('birthDate').value;
+                const numerologyResult = document.getElementById('numerologyResult');
+                if (birthDate) {
+                    const dateSum = birthDate.split('-').join('').split('').reduce((a, b) => parseInt(a) + parseInt(b), 0);
+                    const lifePathNumber = reduceToSingleDigit(dateSum);
+                    numerologyResult.innerHTML = `
+                        <h2>Число Жизненного Пути: ${lifePathNumber}</h2>
+                        ${getLifePathDescription(lifePathNumber)}
+                    `;
+                } else {
+                    numerologyResult.textContent = 'Пожалуйста, введите дату рождения';
+                }
+            };
+
+            function reduceToSingleDigit(number) {
+                while (number > 9) {
+                    number = number.toString().split('').reduce((acc, digit) => acc + parseInt(digit, 10), 0);
+                }
+                return number;
+            }
+
+            function getLifePathDescription(number) {
+                const descriptions = {
+                    1: "Плюсы: Лидерство, независимость, инициативность. Минусы: Упрямство, эгоцентризм, нетерпимсть.",
+                    2: "Плюсы: Сотрудничество, дипломатия, чувствительность. Минусы: Зависимость, нерешительность, чрезмерная чувствительность.",
+                    3: "Плюсы: Общительность, оптимизм, творчество. Минусы: Поверхностность, непостоянство, злишняя болтливость.",
+                    4: "Плюсы: Практичность, стабильность, трудолюбие. Минусы: Упрямство, ригидность, чрезмерная осторожность.",
+                    5: "Плюсы: Свобода, приключения, адаптивность. Минусы: Непостоянство, безответственность, импульсивность.",
+                    6: "Плюсы: Ответственность, забота, гармония. Минусы: Чрезмерная жертвенность, навязчивость, консерватизм.",
+                    7: "Плюсы: Аналитичность, духовность, интроспекция. Минусы: Изоляция, скептицизм, чрезмерная критичность.",
+                    8: "Плюсы: Материальный успех, власть, амбиции. Минусы: Жесткость, властность, материализм.",
+                    9: "Плюсы: Сострадание, гуманизм, щедрость. Минусы: Чрезмерная жертвенность, идеализм, эмоциональная нестабильность."
+                };
+                return descriptions[number];
+            }
+
+            // Анимация звёзд
+            const canvas = document.getElementById('starCanvas');
+            const ctx = canvas.getContext('2d');
+
+            function resizeCanvas() {
+                canvas.width = window.innerWidth;
+                canvas.height = window.innerHeight;
+            }
+            resizeCanvas();
+            window.addEventListener('resize', resizeCanvas);
+
+            const stars = [];
+
+            function createStars() {
+                const starCount = window.innerWidth < 600 ? 100 : 200;
+                for (let i = 0; i < starCount; i++) {
+                    stars.push({
+                        x: Math.random() * canvas.width,
+                        y: Math.random() * canvas.height,
+                        radius: Math.random() * 2 + 1,
+                        speed: Math.random() * 0.5 + 0.1,
+                        direction: Math.random() * 2 * Math.PI,
+                        alpha: Math.random() * 0.5 + 0.5
+                    });
+                }
+            }
+
+            function updateStars() {
+                for (let star of stars) {
+                    star.x += Math.cos(star.direction) * star.speed;
+                    star.y += Math.sin(star.direction) * star.speed;
+
+                    if (star.x > canvas.width || star.x < 0 || star.y > canvas.height || star.y < 0) {
+                        star.x = Math.random() * canvas.width;
+                        star.y = Math.random() * canvas.height;
+                    }
+                }
+            }
+
+            function drawStars() {
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+                for (let star of stars) {
+                    ctx.beginPath();
+                    ctx.arc(star.x, star.y, star.radius, 0, Math.PI * 2);
+                    ctx.fillStyle = `rgba(255, 255, 255, ${star.alpha})`;
+                    ctx.fill();
+                }
+            }
+
+            function animateStars() {
+                updateStars();
+                drawStars();
+                requestAnimationFrame(animateStars);
+            }
+
+            createStars();
+            animateStars();
+
+            function analyzeNumerology() {
+                const birthDate = document.getElementById('birthDate').value;
+                const [year, month, day] = birthDate.split('-').map(Number);
+
+                const lifePathNumber = reduceToSingleDigit(year + month + day);
+                const soulNumber = reduceToSingleDigit(day);
+                const personalityNumber = reduceToSingleDigit(month);
+
+                const numerologyResult = document.getElementById('numerologyResult');
+                numerologyResult.innerHTML = `
+                    <h2>Число Жизненного Пути: ${lifePathNumber}</h2>
+                    ${getLifePathDescription(lifePathNumber)}
+                    <h2>Число Души: ${soulNumber}</h2>
+                    ${getSoulDescription(soulNumber)}
+                    <h2>Число Личности: ${personalityNumber}</h2>
+                    ${getPersonalityDescription(personalityNumber)}
+                `;
+            }
+
+            function getLifePathDescription(number) {
+                const descriptions = {
+                    1: "Плюсы: Лидерство, независимость, инициативность. Минусы: Урямство, эгоцентризм, нетерпимость.",
+                    2: "Плюсы: Сотрудничество, дипломатия, чувствительность. Минусы: Зависимость, нерешительность, чрезмерная чувствительность.",
+                    3: "Плюсы: Общительность, оптимизм, творчество. Минусы: Поверхностность, непостоянство, излишняя болтливость.",
+                    4: "Плюсы: Практичность, стабильность, трудолюбие. Минусы: Упрямство, ригидность, чрезмерная осторожность.",
+                    5: "Плюсы: Свобода, приключения, адаптивность. Минусы: Непостоянство, безответственность, импульсивность.",
+                    6: "Плюсы: Ответственность, забота, гармония. Минусы: Чрезмерная жертвенность, навязчивость, консерватизм.",
+                    7: "Плюсы: Аналитичность, духовность, интроспекция. Минусы: Изоляция, скептицизм, чрезмерная критичность.",
+                    8: "Плюсы: Материальный успех, власть, амбиции. Минусы: Жесткость, властность, материализм.",
+                    9: "Плюсы: Сострадание, гуманизм, щедрость. Минусы: Чрезмерная жертвенность, идеализм, эмоциональная нестабильность."
+                };
+                return descriptions[number];
+            }
+
+            function getSoulDescription(number) {
+                return getLifePathDescription(number); // Используем те же описания для простоты
+            }
+
+            function getPersonalityDescription(number) {
+                return getLifePathDescription(number); // Используем те же описания для простоты
+            }
+        });
+    </script>
+
+    <!-- Coze Web SDK -->
+    <script src="https://sf-cdn.coze.com/obj/unpkg-va/flow-platform/chat-app-sdk/0.1.0-beta.5/libs/oversea/index.js"></script>
+    <script>
+        new CozeWebSDK.WebChatClient({
+            config: {
+                bot_id: '7459047749447680005',
+            },
+            componentProps: {
+                title: 'Chubuk',
+            },
+        });
+    </script>
+</body>
+</html>

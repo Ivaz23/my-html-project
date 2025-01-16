@@ -1,0 +1,258 @@
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Врата Судьбы - Главная</title>
+    
+    <!-- Иконка сайта -->
+    <link rel="icon" href="https://i.ibb.co/stYNTsb/Pentagram-with-one-point-up.png" type="image/png" />
+
+    <!-- Yandex.RTB -->
+    <script>window.yaContextCb=window.yaContextCb||[]</script>
+    <script src="https://yandex.ru/ads/system/context.js" async></script>
+    
+    <!-- Верификация Admitad -->
+    <meta name="verify-admitad" content="a0334947f9" />
+    
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: black; /* Фоновый цвет для симуляции звезд */
+            color: #fff;
+            min-height: 100vh; /* Убедитесь, что тело занимает всю высоту окна */
+            position: relative; /* Для позиционирования канваса */
+        }
+
+        .loader {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            width: 80px; /* Увеличен размер для мобильных устройств */
+            height: 80px; /* Увеличен размер для мобильных устройств */
+            border: 8px solid rgba(255, 255, 255, 0.3);
+            border-top: 8px solid #ff00de; /* Цвет спирали */
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            transform: translate(-50%, -50%);
+            z-index: 9999; /* Убедитесь, что загрузчик выше других элементов */
+        }
+
+        @keyframes spin {
+            0% { transform: translate(-50%, -50%) rotate(0deg); }
+            100% { transform: translate(-50%, -50%) rotate(360deg); }
+        }
+
+        .container {
+            width: 100%; /* Установите ширину контейнера на 100% */
+            background-color: rgba(0, 0, 0, 0.7);
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+            position: relative; /* Для правильного позиционирования */
+            z-index: 1; /* Убедитесь, что контейнер выше канвас */
+        }
+
+        header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            text-shadow: 0 0 10px #ff00de, 0 0 20px #00ffff;
+        }
+
+        footer p {
+            font-size: 0.9em;
+            color: #ccc;
+        }
+
+        .option-button {
+            display: block;
+            margin: 20px auto;
+            padding: 15px 30px;
+            background: linear-gradient(135deg, #ff00de, #00ffff);
+            color: white;
+            text-decoration: none;
+            border-radius: 30px;
+            font-size: 1.2em;
+            transition: all 0.4s ease;
+            text-shadow: 0 0 5px #000;
+            width: 220px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .option-button:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: rgba(255, 255, 255, 0.2);
+            transition: all 0.4s ease;
+            transform: skewX(-45deg);
+        }
+
+        .option-button:hover:before {
+            left: 100%;
+        }
+
+        .option-button:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Стили для канваса */
+        canvas {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0; /* Убедитесь, что канвас ниже других элементов */
+        }
+
+        /* Стили для баннера */
+        .banner {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background-color: #ff00de;
+            color: white;
+            text-align: center;
+            padding: 10px 0;
+            z-index: 10000; /* Убедитесь, что баннер выше других элементов */
+            overflow: hidden; /* Скрываем текст, выходящий за пределы баннера */
+        }
+
+        .banner-text {
+            display: inline-block;
+            white-space: nowrap;
+            animation: scroll-left 10s linear infinite;
+        }
+
+        @keyframes scroll-left {
+            from {
+                transform: translateX(100%);
+            }
+            to {
+                transform: translateX(-100%);
+            }
+        }
+    </style>
+    <script>
+        // Показать баннер после загрузки страницы
+        window.addEventListener('load', () => {
+            const banner = document.getElementById('prizeBanner');
+            banner.style.display = 'block';
+        });
+    </script>
+</head>
+
+<body>
+    <canvas id="starCanvas"></canvas>
+    <div id="loader" class="loader"></div> <!-- Анимация загрузки -->
+    <div class="container">
+        <header>
+            <h1>Врата Судьбы</h1>
+            <p>Выберите направление вашего вопроса</p>
+        </header>
+
+        <a class="option-button" href="нумерология_онлайн.html">Отношения</a>
+        <a class="option-button" href="нумерология_онлайн.html">Бизнес</a>
+        <a class="option-button" href="нумерология_онлайн.html">Здоровье</a>
+
+        <!-- Yandex.RTB R-A-12357507-1 -->
+        <div id="yandex_rtb_R-A-12357507-1"></div>
+        <script>
+            window.yaContextCb.push(() => {
+                Ya.Context.AdvManager.render({
+                    "blockId": "R-A-12357507-1",
+                    "renderTo": "yandex_rtb_R-A-12357507-1",
+                    "type": "feed"
+                })
+            });
+        </script>
+
+        <footer>
+            <p>Помните: судьба - это путь, который вы выбираете сами</p>
+        </footer>
+    </div>
+
+    <div id="prizeBanner" class="banner">
+        <a href="https://sites.google.com/view/prize-chubuk/%D0%B3%D0%BB%D0%B0%D0%B2%D0%BD%D0%B0%D1%8F-%D1%81%D1%82%D1%80%D0%B0%D0%BD%D0%B8%D1%86%D0%B0" class="banner-text" style="color: white; text-decoration: none;">
+            Бонус!
+        </a>
+    </div>
+
+    <script>
+        const canvas = document.getElementById('starCanvas');
+        const ctx = canvas.getContext('2d');
+
+        function resizeCanvas() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        }
+        resizeCanvas();
+        window.addEventListener('resize', resizeCanvas);
+
+        const stars = [];
+
+        function createStars() {
+            const starCount = window.innerWidth < 600 ? 100 : 200;
+            for (let i = 0; i < starCount; i++) {
+                stars.push({
+                    x: Math.random() * canvas.width,
+                    y: Math.random() * canvas.height,
+                    radius: Math.random() * 2 + 1,
+                    speed: Math.random() * 0.5 + 0.1,
+                    direction: Math.random() * 2 * Math.PI,
+                    alpha: Math.random() * 0.5 + 0.5
+                });
+            }
+        }
+
+        function updateStars() {
+            for (let star of stars) {
+                star.x += Math.cos(star.direction) * star.speed;
+                star.y += Math.sin(star.direction) * star.speed;
+
+                if (star.x > canvas.width || star.x < 0 || star.y > canvas.height || star.y < 0) {
+                    star.x = Math.random() * canvas.width;
+                    star.y = Math.random() * canvas.height;
+                }
+            }
+        }
+
+        function drawStars() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            for (let star of stars) {
+                ctx.beginPath();
+                ctx.arc(star.x, star.y, star.radius, 0, Math.PI * 2);
+                ctx.fillStyle = `rgba(255, 255, 255, ${star.alpha})`;
+                ctx.fill();
+            }
+        }
+
+        function animateStars() {
+            updateStars();
+            drawStars();
+            requestAnimationFrame(animateStars);
+        }
+
+        createStars();
+        animateStars();
+
+        // Скрываем загрузчик после загрузки страницы
+        window.addEventListener('load', () => {
+            const loader = document.getElementById('loader');
+            loader.style.display = 'none'; // Скрываем загрузчик после загрузки страницы
+        });
+    </script>
+</body>
+
+</html>
+

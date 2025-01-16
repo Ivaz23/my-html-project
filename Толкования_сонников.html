@@ -1,0 +1,161 @@
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Толкования_сонников | Онлайн гадание</title>
+    
+    <meta name="description" content="Узнайте значение своих снов с помощью нашего сонника.">
+    <meta name="keywords" content="сонник, толкование снов, значение снов, онлайн гадание">
+    
+    <link rel="canonical" href="https://ваш-домен.ru/Толкования_сонников.html">
+    
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: black;
+            color: #fff;
+            text-align: center;
+        }
+
+        h1 {
+            font-size: 3em;
+            color: #ff00de;
+        }
+
+        p {
+            font-size: 1.2em;
+            color: #00ffff;
+        }
+
+        .nav-menu {
+            margin: 20px 0;
+        }
+
+        .nav-button {
+            padding: 15px 30px;
+            font-size: 1.2em;
+            background: linear-gradient(45deg, #ff00de, #00ffff);
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin: 10px;
+        }
+
+        /* Уведомление о боте */
+        .bot-notification {
+            background-color: rgba(51, 51, 51, 0.9); /* Темный фон */
+            color: #fff;
+            padding: 15px;
+            position: fixed;
+            top: 20px; /* Положение сверху */
+            left: 50%;
+            transform: translateX(-50%);
+            border-radius: 5px;
+            z-index: 1000;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+            width: 80%; /* Ширина уведомления */
+            max-width: 600px; /* Максимальная ширина */
+            display: none; /* Скрыто по умолчанию */
+        }
+
+        .close-btn {
+            background: none;
+            border: none;
+            color: #ff00de;
+            cursor: pointer;
+            font-weight: bold;
+            float: right;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Всплывающее уведомление -->
+    <div class="bot-notification" id="botNotification" style="display: none;">
+        <button class="close-btn" onclick="closeNotification()">×</button>
+        У нас есть бот, который может помочь вам с вопросами о снах! Нажмите на кнопку ниже, чтобы начать.
+        <button class="nav-button" onclick="startBot()">Начать разговор</button>
+    </div>
+
+    <nav class="nav-menu">
+        <button class="nav-button" onclick="window.location.href='нумерология_онлайн.html'">Нумерология</button>
+        <button class="nav-button" onclick="window.location.href='таро.html'">Таро</button>
+        <button class="nav-button" onclick="window.location.href='руны.html'">Руны</button>
+        <button class="nav-button" onclick="window.location.href='Толкования_сонников.html'">Толкования_сонников</button>
+    </nav>
+
+    <header>
+        <h1>Сонник</h1>
+        <p>Узнайте значение своих снов с помощью нашего сонника.</p>
+    </header>
+
+    <main>
+        <section class="dream-interpretations">
+            <p>Введите свой сон, и мы постараемся его интерпретировать:</p>
+            <div class="input-container">
+                <input type="text" id="dreamInput" placeholder="Опишите свой сон" />
+                <button class="nav-button" onclick="interpretDream()">Толковать сон</button>
+            </div>
+            <div id="result" class="result"></div>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2025 Онлайн гадание. Все права защищены.</p>
+    </footer>
+
+    <script>
+        function interpretDream() {
+            const dreamInput = document.getElementById('dreamInput').value.toLowerCase();
+            const interpretations = {
+                "полет": "Сон о полете символизирует свободу и стремление к новым высотам.",
+                "падение": "Сон о падении может указывать на потерю контроля или страх перед неудачей.",
+                "вода": "Сон о воде часто символизирует эмоции и подсознание.",
+                "смерть": "Сон о смерти может означать конец одного этапа и начало нового.",
+                "животные": "Сон о животных символизирует инстинкты и природные желания."
+            };
+
+            let result = "Извините, толкование для этого сна не найдено.";
+            for (const [key, value] of Object.entries(interpretations)) {
+                if (dreamInput.includes(key)) {
+                    result = value;
+                    break;
+                }
+            }
+
+            document.getElementById('result').innerText = result;
+        }
+
+        function startBot() {
+            // Здесь можно добавить логику для запуска бота
+            alert("Запуск бота...");
+        }
+
+        function closeNotification() {
+            document.getElementById('botNotification').style.display = 'none';
+        }
+
+        // Показать уведомление о боте при загрузке страницы
+        window.onload = function() {
+            document.getElementById('botNotification').style.display = 'block';
+        };
+    </script>
+
+    <!-- Интеграция бота Coze -->
+    <script src="https://sf-cdn.coze.com/obj/unpkg-va/flow-platform/chat-app-sdk/1.1.0-beta.0/libs/oversea/index.js"></script>
+    <script>
+        new CozeWebSDK.WebChatClient({
+            config: {
+                bot_id: '7459723475868188678',
+            },
+            componentProps: {
+                title: 'Coze',
+            },
+        });
+    </script>
+</body>
+
+</html>

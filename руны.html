@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Гадание на Рунах</title>
+   
+    <!-- Иконка сайта -->
+    <link rel="icon" href="https://i.ibb.co/stYNTsb/Pentagram-with-one-point-up.png" type="image/png" />
+
+    
+    <!-- Yandex.RTB -->
+    <script>window.yaContextCb=window.yaContextCb||[]</script>
+    <script src="https://yandex.ru/ads/system/context.js" async></script>
+    
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: black; /* Черный фон */
+            color: #fff;
+            overflow: hidden; /* Скрыть прокрутку */
+        }
+
+        #starCanvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1; /* Канвас под контентом */
+        }
+
+        .button {
+            padding: 15px 30px;
+            font-size: 1.2em;
+            background: linear-gradient(45deg, #ff00de, #00ffff);
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 10px;
+            box-shadow: 0 0 10px rgba(255, 0, 222, 0.5), 0 0 10px rgba(0, 255, 255, 0.5);
+            transition: background 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .button:hover {
+            background: linear-gradient(45deg, #00ffff, #ff00de);
+            box-shadow: 0 0 20px rgba(255, 0, 222, 0.7), 0 0 20px rgba(0, 255, 255, 0.7);
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0, 0, 0, 0.8);
+        }
+
+        .modal-content {
+            background-color: rgba(0, 0, 0, 0.9);
+            margin: 15% auto;
+            padding: 20px;
+            border: 1px solid #00ffff;
+            width: 80%;
+            max-width: 600px;
+            border-radius: 10px;
+            text-align: left;
+        }
+
+        .close {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+        }
+
+        .close:hover,
+        .close:focus {
+            color: #fff;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        .description {
+            margin-top: 10px;
+            font-size: 1em;
+            color: #ccc;
+            text-shadow: 0 0 5px #00ffff;
+        }
+
+        h1 {
+            font-size: 3em;
+            text-shadow: 0 0 10px #ff00de, 0 0 20px #ff00de, 0 0 30px #ff00de;
+            color: #ff00de;
+        }
+
+        p {
+            font-size: 1.2em;
+            text-shadow: 0 0 5px #00ffff, 0 0 10px #00ffff;
+            color: #00ffff;
+        }
+
+        h2 {
+            font-size: 2em;
+            text-shadow: 0 0 5px #ff00de, 0 0 10px #00ffff;
+        }
+
+        .nav-button {
+            padding: 15px 30px; /* Увеличенный padding */
+            font-size: 1.2em; /* Увеличенный размер шрифта */
+            background: linear-gradient(45deg, #ff00de, #00ffff);
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin: 10px; /* Отступ между кнопками */
+            box-shadow: 0 0 10px rgba(255, 0, 222, 0.5), 0 0 10px rgba(0, 255, 255, 0.5);
+            transition: background 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .nav-button:hover {
+            background: linear-gradient(45deg, #00ffff, #ff00de);
+            box-shadow: 0 0 20px rgba(255, 0, 222, 0.7), 0 0 20px rgba(0, 255, 255, 0.7);
+        }
+
+        .ancient-text {
+            font-family: 'Cinzel', serif; /* Используем выбранный шрифт */
+            font-size: 2em; /* Размер шрифта */
+            color: #ffcc00; /* Цвет текста */
+            text-shadow: 0 0 10px rgba(255, 204, 0, 0.7), 0 0 20px rgba(255, 204, 0, 0.5); /* Эффект свечения */
+            letter-spacing: 2px; /* Расстояние между буквами */
+            line-height: 1.5; /* Высота строки */
+        }
+
+        .banner {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background-color: #ff00de;
+            color: white;
+            text-align: center;
+            padding: 10px 0;
+            z-index: 10000;
+            overflow: hidden;
+        }
+
+        .banner-text {
+            display: inline-block;
+            white-space: nowrap;
+            animation: scroll-left 10s linear infinite;
+        }
+
+        @keyframes scroll-left {
+            from {
+                transform: translateX(100%);
+            }
+            to {
+                transform: translateX(-100%);
+            }
+        }
+
+        .content {
+            padding-top: 50px; /* Добавьте отст��п сверху, равный высоте баннера */
+        }
+    </style>
+</head>
+
+<body>
+    <canvas id="starCanvas"></canvas>
+    <div class="banner">
+        <a href="https://sites.google.com/view/prize-chubuk/%D0%B3%D0%BB%D0%B0%D0%B2%D0%BD%D0%B0%D1%8F-%D1%81%D1%82%D1%80%D0%B0%D0%BD%D0%B8%D1%86%D0%B0" class="banner-text" style="color: white; text-decoration: none;">
+            Бонус!
+        </a>
+    </div>
+    <div class="content"> <!-- Добавьте этот контейнер -->
+        <nav>
+            <button class="nav-button" onclick="window.location.href='нумерология_онлайн.html'">Нумерология</button>
+            <button class="nav-button" onclick="window.location.href='таро.html'">Таро</button>
+            <button class="nav-button" onclick="window.location.href='руны.html'">Руны</button>  
+            <button class="nav-button" onclick="window.location.href='толкования_сонников.html'">Толкования сонников</button>        </nav>
+        <header>
+            <h1>Гадание на Рунах</h1>
+            <p>Откройте тайны своей судьбы с помощью рун</p>
+        </header>
+
+        <main>
+            <button class="button" onclick="openModal('runeModal')">Выбрать руну</button>
+        </main>
+
+        <!-- Модальное окно для Рун -->
+        <div id="runeModal" class="modal">
+            <div class="modal-content">
+                <span class="close" onclick="closeModal('runeModal')">&times;</span>
+                <h2>Гадание на Рунах</h2>
+                <div class="description">
+                    Руны — это древние символы, которые могут помочь вам понять вашу судьбу и принять важные решения.
+                </div>
+                <button class="button" onclick="drawRune()">Выбрать руну</button>
+                <div id="runeResult" class="result"></div>
+            </div>
+        </div>
+
+        <!-- Yandex.RTB R-A-12357355-1 -->
+        <div id="yandex_rtb_R-A-12357355-1"></div>
+        <script>
+            window.yaContextCb.push(() => {
+                Ya.Context.AdvManager.render({
+                    "blockId": "R-A-12357355-1",
+                    "type": "floorAd",
+                    "platform": "touch"
+                })
+            });
+        </script>
+
+        <footer>
+            <p>&copy; 2024 Гадание на Рунах. Все права защищены.</p>
+        </footer>
+    </div>
+
+    <script>
+        function openModal(modalId) {
+            document.getElementById(modalId).style.display = "block";
+        }
+
+        function closeModal(modalId) {
+            document.getElementById(modalId).style.display = "none";
+        }
+
+        function drawRune() {
+            const runes = {
+                "Феху": "Феху символизирует багатство, изобилие и процветание. Это руна, которая говорит о материальном успехе и новых возможностях.",
+                "Уруз": "Уруз представляет собой силу, здоровье и выносливость. Эта руна говорит о необходимости проявить мужество и решительность.",
+                "Турисаз": "Турисаз символизирует защиту, препятствия и вызовы. Это руна, которая предупреждает о возможных трудностях и необходимости быть осторожным.",
+                "Ансуз": "Ансуз олицетворяет вдохновение, знания и общение. Эта руна говорит о важности обучения и обмена идеями.",
+                "Райдо": "Райдо символизирует путешествие, движение и перемены. Это руна, которая побуждает вас следовать за своими мечтами и не бояться перемен."
+            };
+            const randomRune = Object.keys(runes)[Math.floor(Math.random() * Object.keys(runes).length)];
+            document.getElementById('runeResult').innerHTML = `<strong>Ваша руна:</strong> ${randomRune}<br>${runes[randomRune]}`;
+        }
+
+        const canvas = document.getElementById('starCanvas');
+        const ctx = canvas.getContext('2d');
+
+        function resizeCanvas() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        }
+        resizeCanvas();
+        window.addEventListener('resize', resizeCanvas);
+
+        const stars = [];
+
+        function createStars() {
+            const starCount = window.innerWidth < 600 ? 100 : 200;
+            for (let i = 0; i < starCount; i++) {
+                stars.push({
+                    x: Math.random() * canvas.width,
+                    y: Math.random() * canvas.height,
+                    radius: Math.random() * 2 + 1,
+                    speed: Math.random() * 0.5 + 0.1,
+                    direction: Math.random() * 2 * Math.PI,
+                    alpha: Math.random() * 0.5 + 0.5
+                });
+            }
+        }
+
+        function updateStars() {
+            for (let star of stars) {
+                star.x += Math.cos(star.direction) * star.speed;
+                star.y += Math.sin(star.direction) * star.speed;
+
+                if (star.x > canvas.width || star.x < 0 || star.y > canvas.height || star.y < 0) {
+                    star.x = Math.random() * canvas.width;
+                    star.y = Math.random() * canvas.height;
+                }
+            }
+        }
+
+        function drawStars() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            for (let star of stars) {
+                ctx.beginPath();
+                ctx.arc(star.x, star.y, star.radius, 0, Math.PI * 2);
+                ctx.fillStyle = `rgba(255, 255, 255, ${star.alpha})`;
+                ctx.fill();
+            }
+        }
+
+        function animateStars() {
+            updateStars();
+            drawStars();
+            requestAnimationFrame(animateStars);
+        }
+
+        createStars();
+        animateStars();
+    </script>
+</body>
+
+</html>
