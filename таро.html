@@ -3,37 +3,83 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Гадание на картах Таро онлайн | Предсказания и расклады на будущее</title>
+    <title>Гадание на картах Таро онлайн | Магический Портал Предсказаний</title>
     
     <!-- Мета-теги для SEO -->
-    <meta name="description" content="Бесплатное онлайн гадание на картах Таро. Узнайте свое будущее, получите ответы на важные вопросы и раскройте тайны судьбы с помощью точных предсказаний.">
+    <meta name="description" content="Волшебное онлайн гадание на картах Таро с 3D анимациями. Узнайте свое будущее, получите ответы на важные вопросы и раскройте тайны судьбы с помощью точных предсказаний.">
     <meta name="keywords" content="таро онлайн, гадание на картах таро, расклад таро, предсказание будущего, онлайн гадание, карты таро значение">
     
     <!-- Канонический URL -->
     <link rel="canonical" href="https://ваш-домен.ru/таро.html">
     
     <!-- OpenGraph разметка -->
-    <meta property="og:title" content="Гадание на картах Таро онлайн | Предсказания и расклады на будущее">
-    <meta property="og:description" content="Бесплатное онлайн гадание на картах Таро. Узнайте свое будущее, получите ответы на важные вопросы и раскройте тайны судьбы с помощью точных предсказаний.">
+    <meta property="og:title" content="Гадание на картах Таро онлайн | Магический Портал Предсказаний">
+    <meta property="og:description" content="Волшебное онлайн гадание на картах Таро с 3D анимациями. Узнайте свое будущее и раскройте тайны судьбы.">
     <meta property="og:image" content="https://ваш-домен.ru/images/tarot-cards.jpg">
     <meta property="og:url" content="https://ваш-домен.ru/таро.html">
     <meta property="og:type" content="website">
     
     <!-- Иконка сайта -->
     <link rel="icon" href="https://i.ibb.co/stYNTsb/Pentagram-with-one-point-up.png" type="image/png" />
-        <!-- Yandex.RTB -->
+    
+    <!-- Yandex.RTB -->
     <script>window.yaContextCb=window.yaContextCb||[]</script>
     <script src="https://yandex.ru/ads/system/context.js" async></script>
 
     <style>
+        @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600&family=Dancing+Script:wght@700&display=swap');
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
         body {
             margin: 0;
             padding: 0;
-            background-color: black;
+            background: radial-gradient(circle at 50% 50%, #2d1b69, #000000);
             color: #fff;
             overflow-x: hidden;
             overflow-y: auto;
             min-height: 100vh;
+            font-family: 'Cinzel', serif;
+            cursor: none;
+        }
+
+        /* Магический курсор */
+        .magic-cursor {
+            position: fixed;
+            width: 25px;
+            height: 25px;
+            background: radial-gradient(circle, #9d4edd, #c77dff);
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 10000;
+            mix-blend-mode: screen;
+            animation: tarotPulse 2.5s infinite;
+        }
+
+        @keyframes tarotPulse {
+            0%, 100% { transform: scale(1); opacity: 0.8; }
+            50% { transform: scale(1.8); opacity: 1; }
+        }
+
+        .cursor-trail {
+            position: fixed;
+            width: 6px;
+            height: 6px;
+            background: #9d4edd;
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 9999;
+            opacity: 0;
+            animation: trailFade 1.2s ease-out forwards;
+        }
+
+        @keyframes trailFade {
+            0% { opacity: 1; transform: scale(1); }
+            100% { opacity: 0; transform: scale(0.3); }
         }
 
         #starCanvas {
@@ -45,118 +91,198 @@
             z-index: -1;
         }
 
+        /* Aurora фон */
+        .tarot-aurora {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -2;
+            opacity: 0.5;
+            background: linear-gradient(45deg, 
+                rgba(157, 78, 221, 0.4) 0%,
+                rgba(199, 125, 255, 0.4) 25%,
+                rgba(157, 78, 221, 0.4) 50%,
+                rgba(199, 125, 255, 0.4) 75%,
+                rgba(157, 78, 221, 0.4) 100%);
+            background-size: 400% 400%;
+            animation: tarotAurora 15s ease-in-out infinite;
+        }
+
+        @keyframes tarotAurora {
+            0%, 100% { background-position: 0% 50%; }
+            25% { background-position: 100% 0%; }
+            50% { background-position: 100% 100%; }
+            75% { background-position: 0% 100%; }
+        }
+
         .nav-menu {
             position: relative;
             display: flex;
             justify-content: center;
             margin: 20px 0;
+            flex-wrap: wrap;
         }
 
         .nav-button {
-            padding: 15px 30px;
-            font-size: 1.2em;
-            background: linear-gradient(45deg, #ff00de, #00ffff);
+            padding: 18px 35px;
+            font-size: 1.3em;
+            background: linear-gradient(45deg, #9d4edd, #c77dff);
             color: #fff;
             border: none;
-            border-radius: 5px;
+            border-radius: 15px;
             cursor: pointer;
             margin: 10px;
-            box-shadow: 0 0 10px rgba(255, 0, 222, 0.5), 0 0 10px rgba(0, 255, 255, 0.5);
-            transition: background 0.3s ease, box-shadow 0.3s ease;
+            box-shadow: 
+                0 0 25px rgba(157, 78, 221, 0.6), 
+                0 0 35px rgba(199, 125, 255, 0.4),
+                inset 0 0 25px rgba(255, 255, 255, 0.1);
+            transition: all 0.5s ease;
+            font-weight: bold;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .nav-button:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, 
+                transparent, 
+                rgba(255, 255, 255, 0.4), 
+                transparent);
+            transition: all 0.6s ease;
+            transform: skewX(-45deg);
+        }
+
+        .nav-button:hover:before {
+            left: 100%;
         }
 
         .nav-button:hover {
-            background: linear-gradient(45deg, #00ffff, #ff00de);
-            box-shadow: 0 0 20px rgba(255, 0, 222, 0.7), 0 0 20px rgba(0, 255, 255, 0.7);
-        }
-
-        .indicator {
-            position: absolute;
-            bottom: -5px;
-            left: 0;
-            height: 4px;
-            background-color: #00ffff;
-            transition: left 0.3s, width 0.3s;
-            width: 100%;
+            background: linear-gradient(45deg, #c77dff, #9d4edd);
+            box-shadow: 
+                0 0 35px rgba(157, 78, 221, 0.8), 
+                0 0 55px rgba(199, 125, 255, 0.6);
+            transform: translateY(-8px) scale(1.05);
         }
 
         .button {
-            padding: 15px 30px;
-            font-size: 1.2em;
-            background: linear-gradient(45deg, #ff00de, #00ffff);
+            padding: 20px 40px;
+            font-size: 1.4em;
+            background: linear-gradient(45deg, #9d4edd, #c77dff);
             color: #fff;
             border: none;
-            border-radius: 5px;
+            border-radius: 25px;
             cursor: pointer;
-            margin-top: 10px;
-            box-shadow: 0 0 10px rgba(255, 0, 222, 0.5), 0 0 10px rgba(0, 255, 255, 0.5);
-            transition: background 0.3s ease, box-shadow 0.3s ease;
+            margin: 20px;
+            box-shadow: 
+                0 0 30px rgba(157, 78, 221, 0.6), 
+                0 0 40px rgba(199, 125, 255, 0.4);
+            transition: all 0.5s ease;
+            font-weight: bold;
+            position: relative;
+            overflow: hidden;
         }
 
         .button:hover {
-            background: linear-gradient(45deg, #00ffff, #ff00de);
-            box-shadow: 0 0 20px rgba(255, 0, 222, 0.7), 0 0 20px rgba(0, 255, 255, 0.7);
+            transform: translateY(-10px) scale(1.1);
+            box-shadow: 
+                0 15px 40px rgba(157, 78, 221, 0.8), 
+                0 0 60px rgba(199, 125, 255, 0.6);
         }
 
         .modal {
             display: none;
             position: fixed;
-            z-index: 1;
+            z-index: 1000;
             left: 0;
             top: 0;
             width: 100%;
             height: 100%;
             overflow: auto;
-            background-color: rgba(0, 0, 0, 0.8);
+            background-color: rgba(0, 0, 0, 0.95);
+            backdrop-filter: blur(10px);
         }
 
         .modal-content {
-            background-color: rgba(0, 0, 0, 0.9);
-            margin: 15% auto;
-            padding: 20px;
-            border: 1px solid #00ffff;
-            width: 80%;
-            max-width: 600px;
-            border-radius: 10px;
-            text-align: left;
+            background: radial-gradient(circle at 50% 50%, rgba(45, 27, 105, 0.95), rgba(0, 0, 0, 0.95));
+            margin: 3% auto;
+            padding: 40px;
+            border: 3px solid #9d4edd;
+            width: 95%;
+            max-width: 900px;
+            border-radius: 25px;
+            text-align: center;
+            box-shadow: 
+                0 0 60px rgba(157, 78, 221, 0.5),
+                inset 0 0 60px rgba(157, 78, 221, 0.1);
+            position: relative;
         }
 
         .close {
-            color: #aaa;
+            color: #c77dff;
             float: right;
-            font-size: 28px;
+            font-size: 40px;
             font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
         }
 
-        .close:hover,
-        .close:focus {
-            color: #fff;
-            text-decoration: none;
-            cursor: pointer;
+        .close:hover {
+            color: #9d4edd;
+            text-shadow: 0 0 25px #9d4edd;
+            transform: scale(1.3);
         }
 
         .description {
-            margin-top: 10px;
-            font-size: 1em;
-            color: #ccc;
-            text-shadow: 0 0 5px #00ffff;
+            margin: 25px 0;
+            font-size: 1.3em;
+            color: #c77dff;
+            text-shadow: 0 0 15px rgba(199, 125, 255, 0.5);
+            line-height: 1.7;
         }
 
         h1 {
-            font-size: 3em;
-            text-shadow: 0 0 10px #ff00de, 0 0 20px #ff00de, 0 0 30px #ff00de;
-            color: #ff00de;
+            font-family: 'Dancing Script', cursive;
+            font-size: 4.5em;
+            background: linear-gradient(45deg, #9d4edd, #c77dff, #9d4edd);
+            background-size: 200% 200%;
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: tarotTitleShimmer 4s ease-in-out infinite;
+            margin-bottom: 15px;
+            text-shadow: 0 0 40px rgba(157, 78, 221, 0.6);
+        }
+
+        @keyframes tarotTitleShimmer {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
         }
 
         p {
-            font-size: 1.2em;
-            text-shadow: 0 0 5px #00ffff, 0 0 10px #00ffff;
-            color: #00ffff;
+            font-size: 1.4em;
+            text-shadow: 0 0 20px #c77dff;
+            color: #c77dff;
+            margin-bottom: 25px;
+            animation: textGlow 3s ease-in-out infinite alternate;
+        }
+
+        @keyframes textGlow {
+            from { text-shadow: 0 0 20px #c77dff; }
+            to { text-shadow: 0 0 35px #c77dff, 0 0 50px #9d4edd; }
         }
 
         h2 {
-            font-size: 2em;
-            text-shadow: 0 0 5px #ff00de, 0 0 10px #00ffff;
+            font-size: 2.8em;
+            text-shadow: 0 0 20px #9d4edd, 0 0 35px #c77dff;
+            color: #c77dff;
+            margin-bottom: 20px;
         }
 
         .banner {
@@ -164,195 +290,626 @@
             top: 0;
             left: 0;
             width: 100%;
-            background-color: #ff00de;
+            background: linear-gradient(90deg, #9d4edd, #c77dff, #9d4edd);
+            background-size: 200% 200%;
+            animation: tarotBannerShimmer 3s ease-in-out infinite;
             color: white;
             text-align: center;
-            padding: 10px 0;
+            padding: 15px 0;
             z-index: 10000;
             overflow: hidden;
+            box-shadow: 0 5px 30px rgba(157, 78, 221, 0.5);
+        }
+
+        @keyframes tarotBannerShimmer {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
         }
 
         .banner-text {
             display: inline-block;
             white-space: nowrap;
-            animation: scroll-left 10s linear infinite;
+            animation: scroll-left 12s linear infinite;
+            font-weight: bold;
+            font-size: 1.2em;
+            text-shadow: 0 0 15px rgba(0, 0, 0, 0.8);
         }
 
         @keyframes scroll-left {
-            from {
-                transform: translateX(100%);
-            }
-            to {
-                transform: translateX(-100%);
-            }
+            from { transform: translateX(100%); }
+            to { transform: translateX(-100%); }
         }
 
         .content {
             position: relative;
             z-index: 1;
-            padding-top: 50px;
-            padding-bottom: 20px;
+            padding-top: 80px;
+            padding-bottom: 30px;
             overflow-y: auto;
-            max-width: 1200px;
+            max-width: 1400px;
             margin: 0 auto;
             text-align: center;
         }
 
-        /* Стили для мобильных устройств */
-        @media (max-width: 768px) {
-            .content {
-                padding: 60px 15px 20px;
+        /* 3D Карты Таро */
+        #cardContainer {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 30px;
+            margin: 40px 0;
+            perspective: 1200px;
+            min-height: 300px;
+        }
+
+        .tarot-card {
+            width: 120px;
+            height: 200px;
+            position: relative;
+            transform-style: preserve-3d;
+            transition: all 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            cursor: pointer;
+            animation: cardFloat 6s ease-in-out infinite;
+        }
+
+        .tarot-card:nth-child(odd) {
+            animation-delay: -3s;
+        }
+
+        @keyframes cardFloat {
+            0%, 100% { transform: translateY(0px) rotateY(0deg); }
+            50% { transform: translateY(-20px) rotateY(5deg); }
+        }
+
+        .card-face {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            backface-visibility: hidden;
+            border-radius: 15px;
+            box-shadow: 
+                0 15px 35px rgba(0, 0, 0, 0.6),
+                0 0 40px rgba(157, 78, 221, 0.4);
+            border: 3px solid #9d4edd;
+        }
+
+        .card-back {
+            background: linear-gradient(135deg, #2d1b69, #9d4edd);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.5em;
+            color: #c77dff;
+            text-shadow: 0 0 20px #c77dff;
+        }
+
+        .card-front {
+            background: linear-gradient(135deg, #f8f9fa, #e9ecef);
+            color: #2d1b69;
+            transform: rotateY(180deg);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 10px;
+            font-size: 0.9em;
+            font-weight: bold;
+            text-align: center;
+        }
+
+        .tarot-card.flipped {
+            transform: rotateY(180deg) scale(1.1);
+            z-index: 10;
+        }
+
+        .tarot-card:hover {
+            transform: translateY(-15px) rotateY(15deg) scale(1.05);
+            box-shadow: 
+                0 25px 50px rgba(0, 0, 0, 0.8),
+                0 0 60px rgba(157, 78, 221, 0.8);
+        }
+
+        .shuffle-area {
+            margin: 30px 0;
+            padding: 30px;
+            border: 3px dashed #9d4edd;
+            border-radius: 20px;
+            background: rgba(157, 78, 221, 0.1);
+            text-align: center;
+        }
+
+        .result {
+            margin-top: 40px;
+            padding: 30px;
+            background: rgba(0, 0, 0, 0.8);
+            border-radius: 20px;
+            color: #c77dff;
+            border: 3px solid #9d4edd;
+            box-shadow: 
+                0 0 40px rgba(157, 78, 221, 0.4),
+                inset 0 0 40px rgba(157, 78, 221, 0.1);
+            font-size: 1.2em;
+            line-height: 1.8;
+            animation: resultGlow 3s ease-in-out infinite alternate;
+        }
+
+        @keyframes resultGlow {
+            from { 
+                box-shadow: 0 0 40px rgba(157, 78, 221, 0.4), inset 0 0 40px rgba(157, 78, 221, 0.1);
             }
-            
-            .nav-menu {
-                flex-wrap: wrap;
+            to { 
+                box-shadow: 0 0 60px rgba(157, 78, 221, 0.6), inset 0 0 60px rgba(157, 78, 221, 0.2);
             }
-            
-            .nav-button {
-                margin: 5px;
-                padding: 10px 20px;
+        }
+
+        /* Магические частицы */
+        .tarot-particles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            overflow: hidden;
+        }
+
+        .tarot-particle {
+            position: absolute;
+            color: #9d4edd;
+            font-size: 25px;
+            animation: tarotParticleFloat 12s infinite linear;
+            opacity: 0.7;
+        }
+
+        @keyframes tarotParticleFloat {
+            0% {
+                transform: translateY(100vh) rotate(0deg);
+                opacity: 0;
             }
+            10% {
+                opacity: 1;
+            }
+            90% {
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-100px) rotate(360deg);
+                opacity: 0;
+            }
+        }
+
+        /* Звуковая кнопка */
+        .sound-button {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: linear-gradient(45deg, #9d4edd, #c77dff);
+            border: none;
+            border-radius: 50%;
+            width: 65px;
+            height: 65px;
+            cursor: pointer;
+            z-index: 10001;
+            box-shadow: 0 0 25px rgba(157, 78, 221, 0.5);
+            transition: all 0.3s ease;
+            font-size: 1.6em;
+        }
+
+        .sound-button:hover {
+            transform: scale(1.15);
+            box-shadow: 0 0 35px rgba(157, 78, 221, 0.8);
         }
 
         main {
-            max-width: 800px;
+            max-width: 1200px;
             margin: 0 auto;
-            padding: 0 20px;
+            padding: 0 30px;
             text-align: center;
         }
 
-        .tarot-introduction {
-            margin: 30px auto;
+        .tarot-introduction, .tarot-types {
+            margin: 40px auto;
             text-align: center;
-        }
-
-        .tarot-types {
-            margin: 30px auto;
-            text-align: center;
+            max-width: 900px;
         }
 
         .tarot-types ul {
             list-style: none;
             padding: 0;
-            margin: 20px auto;
-            display: inline-block;
+            margin: 30px auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
             text-align: left;
         }
 
-        header {
-            text-align: center;
-            margin: 30px auto;
+        .tarot-types li {
+            background: rgba(157, 78, 221, 0.2);
+            padding: 20px;
+            border-radius: 15px;
+            border: 2px solid #9d4edd;
+            transition: all 0.3s ease;
+        }
+
+        .tarot-types li:hover {
+            background: rgba(157, 78, 221, 0.3);
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(157, 78, 221, 0.4);
+        }
+
+        @media (max-width: 768px) {
+            .content { padding: 70px 20px 30px; }
+            .nav-menu { flex-direction: column; align-items: center; }
+            .nav-button { margin: 8px; padding: 15px 25px; font-size: 1.1em; }
+            .tarot-card { width: 90px; height: 150px; }
+            h1 { font-size: 3em; }
+            #cardContainer { gap: 15px; }
         }
     </style>
 </head>
 
 <body>
+    <div class="tarot-aurora"></div>
+    <div class="tarot-particles" id="tarotParticles"></div>
     <canvas id="starCanvas"></canvas>
-    <nav class="nav-menu">                                                                                          
-        <button class="nav-button" onclick="window.location.href='нумерология_онлайн.html'">Нумерология</button>
-        <button class="nav-button" onclick="window.location.href='руны.html'">Руны</button>
-        <button class="nav-button" onclick="window.location.href='таро.html'">Таро</button>
-        <button class="nav-button" onclick="window.location.href='толкования.html'">Толкования снов</button>        
-    </nav>
-
-    <header>
-       
-    <main>
-        <section class="tarot-introduction">
-            <p>Карты Таро - древний инструмент предсказания, помогающий раскрыть тайны прошлого, понять настоящее и заглянуть в будущее. Каждая карта несет в себе глубокий символизм и может дать ценные подсказки для принятия важных решений в жизни.</p>
-            
-            <p>Наше онлайн гадание на картах Таро поможет вам получить ответы на волнующие вопросы о любви, карьере, финансах и других сферах жизни. Выберите расклад, сконцентрируйтесь на своем вопросе, и карты раскроют перед вами свои тайны.</p>
-            
-            <p>Помните, что карты Таро - это не только инструмент предсказания, но и мощное средство для самопознания и личностного роста. Они помогают увидеть ситуацию с разных сторон и принять взвешенное решение.</p>
-        </section>
-        
-        <button class="button" onclick="openModal('tarotModal')">Гадание на картах Таро</button>
-        
-        <section class="tarot-types">
-            <h2>Виды раскладов Таро</h2>
-            <p>Мы предлагаем различные виды раскладов, каждый из которых подходит для определенных жизненных ситуаций:</p>
-            <ul>
-                <li>Расклад на ближайшее будущее</li>
-                <li>Расклад на отношения</li>
-                <li>Карьерный расклад</li>
-                <li>Финансовый прогноз</li>
-                <li>Расклад на самопознание</li>
-            </ul>
-        </section>
-    </main>
-
-    <!-- Модальное окно для Таро -->
-    <div id="tarotModal" class="modal">
-        <div class="modal-content">
-            <span class="close" onclick="closeModal('tarotModal')">&times;</span>
-            <h2>Гадание на картах Таро</h2>
-            <div class="description">
-                Карты Таро это инструмент для пресказания будущего и анализа настоящего. Каждая карта имеет свое значене и символику, которые помогают раскрыть тайны вашей жизни.
-            </div>
-            <button class="button" onclick="drawTarotCard()">Вытянуть карту</button>
-            <div id="tarotResult" class="result"></div>
-        </div>
-    </div>
-
-    <!-- Yandex.RTB R-A-12357042-1 -->
-    <div id="yandex_rtb_R-A-12357042-1"></div>
-    <script>
-        window.yaContextCb.push(() => {
-            Ya.Context.AdvManager.render({
-                "blockId": "R-A-12357042-1",
-                "renderTo": "yandex_rtb_R-A-12357042-1",
-                "type": "feed"
-            })
-        });
-    </script>
-
-    <footer>
-        <p>&copy; 2024 Таро Онлайн. Все права защищены.</p>
-    </footer>
-
-    <script>
-        function openModal(modalId) {
-            document.getElementById(modalId).style.display = "block";
-        }
-
-        function closeModal(modalId) {
-            document.getElementById(modalId).style.display = "none";
-        }
-
-        function drawTarotCard() {
-            const tarotDeck = {
-                "Шут": "Шут символизирует овые начинания, спонтанность и свободу. Это карта, которая побуждает вас следовать за своими мечтами и не бояться неизвестного.",
-                "аг": "Маг представляет собой силу воли, мастерство и способность к реализации. Эта карта говорит о том, что у вас есть все необходимые ресурсы для достижения ваших целей.",
-                "Верховная Жрица": "Верховная Жрица символизирует интуицию, тайные знания и внутреннюю мудрость. Она призывает вас доверять своим инстинктам и искать ответы внутри себя.",
-                "Императрица": "Императрица олицетворяет плодородие, изобилие и заботу. Эта карта говорит о том, что сейчас благоприятное время для творчества и роста.",
-                "Император": "Император символизирует власть, структуру и стабильность. Он напоминает вам о важности дисциплины и порядка в вашей жизни."
-            };
-            const randomCard = Object.keys(tarotDeck)[Math.floor(Math.random() * Object.keys(tarotDeck).length)];
-            document.getElementById('tarotResult').innerHTML = `<strong>Ваша карта:</strong> ${randomCard}<br>${tarotDeck[randomCard]}`;
-        }
-
-        const navButtons = document.querySelectorAll('.nav-button');
-        const indicator = document.querySelector('.indicator');
- 
-        navButtons.forEach(button => {
-            button.addEventListener('mouseenter', () => {
-                indicator.style.left = button.offsetLeft + 'px';
-                indicator.style.width = button.offsetWidth + 'px';
-            });
-        });
-    </script>
-
+    
+    <!-- Кнопка звука -->
+    <button class="sound-button" onclick="toggleSound()" title="Переключить звук">🔊</button>
+    
     <div class="banner">
         <a href="https://chubuk00ru.netlify.app/" class="banner-text" style="color: white; text-decoration: none;">
-            Бонус!
+            🌟 Магический Бонус Таро! 🌟
         </a>
     </div>
+    
     <div class="content">
-        <!-- Ваше основное содержимое здесь -->
-        ...
+        <nav class="nav-menu">                                                                                          
+            <button class="nav-button" onclick="window.location.href='нумерология_онлайн.html'" 
+                    onmouseover="playMagicSound(500, 300)">🔢 Нумерология</button>
+            <button class="nav-button" onclick="window.location.href='руны.html'" 
+                    onmouseover="playMagicSound(600, 300)">ᚱ Руны</button>
+            <button class="nav-button" onclick="window.location.href='таро.html'" 
+                    onmouseover="playMagicSound(700, 300)">🃏 Таро</button>
+            <button class="nav-button" onclick="window.location.href='толкования.html'" 
+                    onmouseover="playMagicSound(800, 300)">💭 Толкования снов</button>        
+        </nav>
+
+        <header>
+            <h1>🔮 Магическое Таро 🔮</h1>
+        </header>
+       
+        <main>
+            <section class="tarot-introduction">
+                <p>🌟 Карты Таро - священный инструмент предсказания, помогающий раскрыть тайны прошлого, понять настоящее и заглянуть в будущее. Каждая карта несет в себе глубокий символизм и может дать ценные подсказки для принятия важных решений в жизни. 🌟</p>
+                
+                <p>✨ Наше волшебное онлайн гадание на картах Таро с 3D анимацией поможет вам получить ответы на волнующие вопросы о любви, карьере, финансах и других сферах жизни. Выберите карту интуитивно, и древняя магия раскроет перед вами свои тайны. ✨</p>
+            </section>
+            
+            <div class="shuffle-area">
+                <h3>🎴 Концентрируйтесь на своем вопросе 🎴</h3>
+                <p>Мысленно сформулируйте вопрос и позвольте интуиции направить ваш выбор</p>
+                <button class="button" onclick="shuffleCards(); playMagicSound(1200, 600)" 
+                        style="margin-top: 20px;">
+                    ✨ Перетасовать карты ✨
+                </button>
+            </div>
+            
+            <div id="cardContainer">
+                <!-- Карты будут добавлены через JavaScript -->
+            </div>
+            
+            <div id="tarotResult" class="result" style="display: none;"></div>
+            
+            <section class="tarot-types">
+                <h2>🌙 Виды магических раскладов Таро 🌙</h2>
+                <p>Мы предлагаем различные виды раскладов, каждый из которых подходит для определенных жизненных ситуаций:</p>
+                <ul>
+                    <li>🔮 Расклад на ближайшее будущее - узнайте, что ждет вас в ближайшее время</li>
+                    <li>💕 Расклад на отношения - получите ответы о любви и партнерстве</li>
+                    <li>💼 Карьерный расклад - раскройте свой профессиональный потенциал</li>
+                    <li>💰 Финансовый прогноз - узнайте о денежных перспективах</li>
+                    <li>🧘 Расклад на самопознание - откройте скрытые аспекты личности</li>
+                </ul>
+            </section>
+        </main>
+
+        <!-- Yandex.RTB R-A-12357042-1 -->
+        <div id="yandex_rtb_R-A-12357042-1"></div>
+        <script>
+            window.yaContextCb.push(() => {
+                Ya.Context.AdvManager.render({
+                    "blockId": "R-A-12357042-1",
+                    "renderTo": "yandex_rtb_R-A-12357042-1",
+                    "type": "feed"
+                })
+            });
+        </script>
+
+        <footer style="margin-top: 60px;">
+            <p>🌟 2024 Магическое Таро. Каждая карта раскрывает новую тайну 🌟</p>
+        </footer>
     </div>
 
     <script>
+        // Расширенная колода Таро
+        const tarotDeck = {
+            "🃏 Шут": {
+                symbol: "🃏",
+                name: "Шут",
+                meaning: "Шут символизирует новые начинания, спонтанность и свободу. Это карта безграничных возможностей, которая побуждает следовать за мечтами и не бояться неизвестного. Время для смелых решений и новых приключений.",
+                element: "Воздух",
+                advice: "Доверьтесь интуиции и будьте открыты новому опыту. Отпустите страхи и сделайте первый шаг."
+            },
+            "🧙 Маг": {
+                symbol: "🧙",
+                name: "Маг",
+                meaning: "Маг представляет силу воли, мастерство и способность к реализации планов. У вас есть все необходимые ресурсы для достижения целей. Время действовать и воплощать идеи в реальность.",
+                element: "Огонь",
+                advice: "Используйте свои таланты и возможности. Сконцентрируйтесь на главной цели и действуйте решительно."
+            },
+            "👸 Верховная Жрица": {
+                symbol: "👸",
+                name: "Верховная Жрица",
+                meaning: "Верховная Жрица символизирует интуицию, тайные знания и внутреннюю мудрость. Она призывает доверять инстинктам и искать ответы внутри себя. Время для медитации и самопознания.",
+                element: "Вода",
+                advice: "Прислушайтесь к внутреннему голосу. Ответы придут через интуицию и сны."
+            },
+            "👑 Императрица": {
+                symbol: "👑",
+                name: "Императрица",
+                meaning: "Императрица олицетворяет плодородие, изобилие и материнскую заботу. Благоприятное время для творчества, роста и развития. Природная сила поможет в реализации планов.",
+                element: "Земля",
+                advice: "Заботьтесь о себе и близких. Время для творческих проектов и развития отношений."
+            },
+            "👨‍💼 Император": {
+                symbol: "👨‍💼",
+                name: "Император",
+                meaning: "Император символизирует власть, структуру и стабильность. Он напоминает о важности дисциплины и порядка. Время для принятия ответственности и лидерства.",
+                element: "Огонь",
+                advice: "Будьте решительны и организованы. Создайте четкий план и следуйте ему."
+            },
+            "🙏 Иерофант": {
+                symbol: "🙏",
+                name: "Иерофант",
+                meaning: "Иерофант представляет традиции, духовное учение и мудрость предков. Время для изучения духовных практик и поиска наставника. Ценность в проверенных временем методах.",
+                element: "Земля",
+                advice: "Обратитесь к традиционным знаниям. Найдите мудрого наставника или духовного учителя."
+            },
+            "💕 Влюбленные": {
+                symbol: "💕",
+                name: "Влюбленные",
+                meaning: "Влюбленные символизируют выбор, гармонию и союз противоположностей. Время для важных решений в отношениях и поиска баланса. Любовь как движущая сила.",
+                element: "Воздух",
+                advice: "Сделайте выбор сердцем. Ищите гармонию в отношениях и баланс в жизни."
+            },
+            "🏆 Колесница": {
+                symbol: "🏆",
+                name: "Колесница",
+                meaning: "Колесница означает победу, контроль и движение вперед. Вы способны преодолеть препятствия благодаря силе воли и определенности. Успех через упорство.",
+                element: "Вода",
+                advice: "Сохраняйте фокус и двигайтесь к цели. Контролируйте эмоции и используйте их как силу."
+            }
+        };
+
+        let audioContext;
+        let soundEnabled = true;
+        let currentCards = [];
+
+        // Инициализация аудио
+        function initAudio() {
+            audioContext = new (window.AudioContext || window.webkitAudioContext)();
+        }
+
+        // Звуковые эффекты
+        function playMagicSound(frequency = 800, duration = 200) {
+            if (!soundEnabled || !audioContext) return;
+            
+            const oscillator = audioContext.createOscillator();
+            const gainNode = audioContext.createGain();
+            
+            oscillator.connect(gainNode);
+            gainNode.connect(audioContext.destination);
+            
+            oscillator.frequency.setValueAtTime(frequency, audioContext.currentTime);
+            oscillator.frequency.exponentialRampToValueAtTime(frequency * 1.8, audioContext.currentTime + duration / 1000);
+            
+            gainNode.gain.setValueAtTime(0.1, audioContext.currentTime);
+            gainNode.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + duration / 1000);
+            
+            oscillator.start(audioContext.currentTime);
+            oscillator.stop(audioContext.currentTime + duration / 1000);
+        }
+
+        function toggleSound() {
+            soundEnabled = !soundEnabled;
+            const button = document.querySelector('.sound-button');
+            button.innerHTML = soundEnabled ? '🔊' : '🔇';
+        }
+
+        // Магический курсор
+        document.addEventListener('DOMContentLoaded', function() {
+            const cursor = document.createElement('div');
+            cursor.className = 'magic-cursor';
+            document.body.appendChild(cursor);
+
+            let mouseX = 0, mouseY = 0;
+            let cursorX = 0, cursorY = 0;
+
+            document.addEventListener('mousemove', (e) => {
+                mouseX = e.clientX;
+                mouseY = e.clientY;
+
+                // Создаем след
+                if (Math.random() < 0.4) {
+                    const trail = document.createElement('div');
+                    trail.className = 'cursor-trail';
+                    trail.style.left = mouseX + 'px';
+                    trail.style.top = mouseY + 'px';
+                    document.body.appendChild(trail);
+
+                    setTimeout(() => {
+                        if (document.body.contains(trail)) {
+                            document.body.removeChild(trail);
+                        }
+                    }, 1200);
+                }
+            });
+
+            function updateCursor() {
+                cursorX += (mouseX - cursorX) * 0.1;
+                cursorY += (mouseY - cursorY) * 0.1;
+                cursor.style.left = cursorX + 'px';
+                cursor.style.top = cursorY + 'px';
+                requestAnimationFrame(updateCursor);
+            }
+            updateCursor();
+
+            // Инициализация
+            document.addEventListener('click', initAudio, { once: true });
+            createTarotCards();
+            createTarotParticles();
+        });
+
+        // Создание карт Таро
+        function createTarotCards() {
+            const container = document.getElementById('cardContainer');
+            const cardKeys = Object.keys(tarotDeck);
+            currentCards = [...cardKeys].sort(() => Math.random() - 0.5).slice(0, 5);
+            
+            container.innerHTML = '';
+            
+            currentCards.forEach((cardKey, index) => {
+                const card = tarotDeck[cardKey];
+                const cardElement = document.createElement('div');
+                cardElement.className = 'tarot-card';
+                cardElement.style.animationDelay = (index * 0.3) + 's';
+                
+                cardElement.innerHTML = `
+                    <div class="card-face card-back">🌟</div>
+                    <div class="card-face card-front">
+                        <div style="font-size: 2em; margin-bottom: 10px;">${card.symbol}</div>
+                        <div style="font-size: 0.8em;">${card.name}</div>
+                    </div>
+                `;
+                
+                cardElement.addEventListener('click', () => {
+                    if (!cardElement.classList.contains('flipped')) {
+                        selectTarotCard(cardKey, cardElement);
+                        playMagicSound(900 + index * 150, 800);
+                    }
+                });
+                
+                cardElement.addEventListener('mouseenter', () => {
+                    playMagicSound(500 + index * 80, 250);
+                });
+                
+                container.appendChild(cardElement);
+            });
+        }
+
+        // Выбор карты Таро
+        function selectTarotCard(cardKey, cardElement) {
+            // Переворачиваем карту
+            cardElement.classList.add('flipped');
+            
+            // Добавляем задержку для анимации переворота
+            setTimeout(() => {
+                const card = tarotDeck[cardKey];
+                const resultDiv = document.getElementById('tarotResult');
+                
+                resultDiv.innerHTML = `
+                    <h3>🌟 Ваша карта: ${card.symbol} ${card.name} 🌟</h3>
+                    <div style="margin: 25px 0;">
+                        <strong>Элемент:</strong> ${card.element}
+                    </div>
+                    <div style="margin: 20px 0; font-size: 1.2em; line-height: 1.8;">
+                        <strong>Значение:</strong><br>
+                        ${card.meaning}
+                    </div>
+                    <div style="margin: 20px 0; color: #c77dff; font-style: italic; font-size: 1.1em;">
+                        <strong>Совет карт:</strong><br>
+                        ${card.advice}
+                    </div>
+                `;
+                
+                resultDiv.style.display = 'block';
+                resultDiv.scrollIntoView({ behavior: 'smooth' });
+                
+                // Эффект появления
+                resultDiv.style.opacity = '0';
+                resultDiv.style.transform = 'translateY(40px)';
+                
+                setTimeout(() => {
+                    resultDiv.style.transition = 'all 1.2s ease';
+                    resultDiv.style.opacity = '1';
+                    resultDiv.style.transform = 'translateY(0)';
+                }, 150);
+            }, 400);
+        }
+
+        // Перетасовка карт
+        function shuffleCards() {
+            const cards = document.querySelectorAll('.tarot-card');
+            const resultDiv = document.getElementById('tarotResult');
+            
+            // Скрываем результат
+            if (resultDiv.style.display !== 'none') {
+                resultDiv.style.transition = 'all 0.6s ease';
+                resultDiv.style.opacity = '0';
+                setTimeout(() => {
+                    resultDiv.style.display = 'none';
+                }, 600);
+            }
+            
+            // Анимация перетасовки карт
+            cards.forEach((card, index) => {
+                setTimeout(() => {
+                    card.classList.remove('flipped');
+                    card.style.animation = 'none';
+                    card.offsetHeight; // Trigger reflow
+                    card.style.animation = `cardFloat 6s ease-in-out infinite`;
+                    card.style.animationDelay = (Math.random() * 3) + 's';
+                    
+                    // Добавляем эффект тасовки
+                    card.style.transform = `
+                        translateY(${(Math.random() - 0.5) * 200}px) 
+                        translateX(${(Math.random() - 0.5) * 100}px) 
+                        rotateY(${Math.random() * 720}deg)
+                        rotateZ(${(Math.random() - 0.5) * 45}deg)
+                    `;
+                    
+                    setTimeout(() => {
+                        card.style.transform = '';
+                        card.style.transition = 'all 1s ease';
+                    }, 1200);
+                }, index * 150);
+            });
+            
+            // Создаем новый набор карт
+            setTimeout(() => {
+                createTarotCards();
+            }, 2000);
+        }
+
+        // Создание магических частиц с символами Таро
+        function createTarotParticles() {
+            const container = document.getElementById('tarotParticles');
+            const tarotSymbols = ['🌟', '🔮', '✨', '🌙', '⭐', '💫', '🃏', '👁️'];
+            
+            for (let i = 0; i < 40; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'tarot-particle';
+                particle.innerHTML = tarotSymbols[Math.floor(Math.random() * tarotSymbols.length)];
+                particle.style.left = Math.random() * 100 + '%';
+                particle.style.animationDelay = Math.random() * 12 + 's';
+                particle.style.animationDuration = (Math.random() * 8 + 12) + 's';
+                particle.style.fontSize = (Math.random() * 15 + 15) + 'px';
+                container.appendChild(particle);
+            }
+        }
+
+        // Улучшенные звезды
         const canvas = document.getElementById('starCanvas');
         const ctx = canvas.getContext('2d');
 
@@ -364,17 +921,33 @@
         window.addEventListener('resize', resizeCanvas);
 
         const stars = [];
+        const shootingStars = [];
 
         function createStars() {
-            const starCount = window.innerWidth < 600 ? 100 : 200;
+            const starCount = window.innerWidth < 600 ? 150 : 350;
             for (let i = 0; i < starCount; i++) {
                 stars.push({
                     x: Math.random() * canvas.width,
                     y: Math.random() * canvas.height,
-                    radius: Math.random() * 2 + 1,
-                    speed: Math.random() * 0.5 + 0.1,
+                    radius: Math.random() * 4 + 1,
+                    speed: Math.random() * 0.8 + 0.2,
                     direction: Math.random() * 2 * Math.PI,
-                    alpha: Math.random() * 0.5 + 0.5
+                    alpha: Math.random() * 0.9 + 0.1,
+                    twinkle: Math.random() * 2 * Math.PI,
+                    color: Math.random() > 0.5 ? 'rgba(157, 78, 221,' : 'rgba(199, 125, 255,'
+                });
+            }
+        }
+
+        function createShootingStar() {
+            if (Math.random() < 0.004) {
+                shootingStars.push({
+                    x: Math.random() * canvas.width,
+                    y: 0,
+                    speedX: (Math.random() - 0.5) * 12,
+                    speedY: Math.random() * 6 + 6,
+                    life: 1,
+                    decay: 0.015
                 });
             }
         }
@@ -383,22 +956,55 @@
             for (let star of stars) {
                 star.x += Math.cos(star.direction) * star.speed;
                 star.y += Math.sin(star.direction) * star.speed;
+                star.twinkle += 0.03;
 
                 if (star.x > canvas.width || star.x < 0 || star.y > canvas.height || star.y < 0) {
                     star.x = Math.random() * canvas.width;
                     star.y = Math.random() * canvas.height;
                 }
             }
+
+            for (let i = shootingStars.length - 1; i >= 0; i--) {
+                const star = shootingStars[i];
+                star.x += star.speedX;
+                star.y += star.speedY;
+                star.life -= star.decay;
+
+                if (star.life <= 0 || star.y > canvas.height) {
+                    shootingStars.splice(i, 1);
+                }
+            }
+
+            createShootingStar();
         }
 
         function drawStars() {
             ctx.clearRect(0, 0, canvas.width, canvas.height);
+            
             for (let star of stars) {
+                const twinkleAlpha = (Math.sin(star.twinkle) + 1) / 2;
                 ctx.beginPath();
                 ctx.arc(star.x, star.y, star.radius, 0, Math.PI * 2);
-                ctx.fillStyle = `rgba(255, 255, 255, ${star.alpha})`;
+                ctx.fillStyle = star.color + (star.alpha * twinkleAlpha) + ')';
                 ctx.fill();
+                
+                ctx.shadowBlur = 20;
+                ctx.shadowColor = star.color + '0.9)';
             }
+
+            for (let star of shootingStars) {
+                ctx.beginPath();
+                ctx.moveTo(star.x, star.y);
+                ctx.lineTo(star.x - star.speedX * 10, star.y - star.speedY * 10);
+                ctx.strokeStyle = `rgba(199, 125, 255, ${star.life})`;
+                ctx.lineWidth = 4;
+                ctx.stroke();
+                
+                ctx.shadowBlur = 25;
+                ctx.shadowColor = '#c77dff';
+            }
+            
+            ctx.shadowBlur = 0;
         }
 
         function animateStars() {
@@ -413,4 +1019,3 @@
 </body>
 
 </html>
-
