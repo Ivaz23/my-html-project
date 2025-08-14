@@ -16,71 +16,214 @@
     <meta name="verify-admitad" content="a0334947f9" />
     
     <style>
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600&family=Dancing+Script:wght@700&display=swap');
+
+        * {
             margin: 0;
             padding: 0;
-            background-color: black; /* Фоновый цвет для симуляции звезд */
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Cinzel', serif;
+            margin: 0;
+            padding: 0;
+            background: radial-gradient(circle at 50% 50%, #1a0033, #000000);
             color: #fff;
-            min-height: 100vh; /* Убедитесь, что тело занимает всю высоту окна */
-            position: relative; /* Для позиционирования канваса */
+            min-height: 100vh;
+            position: relative;
+            overflow-x: hidden;
+            cursor: none;
+        }
+
+        /* Магический курсор */
+        .magic-cursor {
+            position: fixed;
+            width: 20px;
+            height: 20px;
+            background: radial-gradient(circle, #ff00de, #00ffff);
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 10000;
+            mix-blend-mode: screen;
+            animation: pulse 2s infinite;
+        }
+
+        .cursor-trail {
+            position: fixed;
+            width: 4px;
+            height: 4px;
+            background: #ff00de;
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 9999;
+            opacity: 0;
+            animation: trailFade 1s ease-out forwards;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); opacity: 0.8; }
+            50% { transform: scale(1.5); opacity: 1; }
+        }
+
+        @keyframes trailFade {
+            0% { opacity: 1; transform: scale(1); }
+            100% { opacity: 0; transform: scale(0.5); }
+        }
+
+        /* Aurora Background */
+        .aurora {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -2;
+            opacity: 0.6;
+            background: linear-gradient(45deg, 
+                rgba(255, 0, 222, 0.3) 0%,
+                rgba(0, 255, 255, 0.3) 25%,
+                rgba(255, 0, 222, 0.3) 50%,
+                rgba(0, 255, 255, 0.3) 75%,
+                rgba(255, 0, 222, 0.3) 100%);
+            background-size: 400% 400%;
+            animation: aurora 15s ease-in-out infinite;
+        }
+
+        @keyframes aurora {
+            0%, 100% { background-position: 0% 50%; }
+            25% { background-position: 100% 0%; }
+            50% { background-position: 100% 100%; }
+            75% { background-position: 0% 100%; }
+        }
+
+        /* Магические частицы */
+        .magic-particles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            overflow: hidden;
+        }
+
+        .particle {
+            position: absolute;
+            background: radial-gradient(circle, #ff00de, transparent);
+            border-radius: 50%;
+            animation: float 8s infinite linear;
+            opacity: 0.7;
+        }
+
+        .particle:nth-child(odd) {
+            background: radial-gradient(circle, #00ffff, transparent);
+        }
+
+        @keyframes float {
+            0% {
+                transform: translateY(100vh) rotate(0deg);
+                opacity: 0;
+            }
+            10% {
+                opacity: 1;
+            }
+            90% {
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-100px) rotate(360deg);
+                opacity: 0;
+            }
         }
 
         .loader {
             position: fixed;
             top: 50%;
             left: 50%;
-            width: 80px; /* Увеличен размер для мобильных устройств */
-            height: 80px; /* Увеличен размер для мобильных устройств */
-            border: 8px solid rgba(255, 255, 255, 0.3);
-            border-top: 8px solid #ff00de; /* Цвет спирали */
+            width: 120px;
+            height: 120px;
+            border: 8px solid rgba(255, 255, 255, 0.1);
+            border-top: 8px solid #ff00de;
+            border-right: 8px solid #00ffff;
             border-radius: 50%;
-            animation: spin 1s linear infinite;
+            animation: magicSpin 2s linear infinite;
             transform: translate(-50%, -50%);
-            z-index: 9999; /* Убедитесь, что загрузчик выше других элементов */
+            z-index: 9999;
+            box-shadow: 0 0 50px #ff00de, inset 0 0 50px #00ffff;
         }
 
-        @keyframes spin {
-            0% { transform: translate(-50%, -50%) rotate(0deg); }
-            100% { transform: translate(-50%, -50%) rotate(360deg); }
+        @keyframes magicSpin {
+            0% { transform: translate(-50%, -50%) rotate(0deg) scale(1); }
+            50% { transform: translate(-50%, -50%) rotate(180deg) scale(1.2); }
+            100% { transform: translate(-50%, -50%) rotate(360deg) scale(1); }
         }
 
         .container {
-            width: 100%; /* Установите ширину контейнера на 100% */
-            background-color: rgba(0, 0, 0, 0.7);
-            padding: 20px;
-            border-radius: 15px;
-            box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
-            position: relative; /* Для правильного позиционирования */
-            z-index: 1; /* Убедитесь, что контейнер выше канвас */
+            width: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            padding: 40px;
+            border-radius: 25px;
+            box-shadow: 
+                0 0 50px rgba(255, 0, 222, 0.3),
+                0 0 100px rgba(0, 255, 255, 0.2),
+                inset 0 0 50px rgba(255, 255, 255, 0.1);
+            position: relative;
+            z-index: 1;
+            backdrop-filter: blur(10px);
+            border: 2px solid rgba(255, 0, 222, 0.3);
         }
 
         header h1 {
-            font-size: 2.5em;
-            margin-bottom: 10px;
-            text-shadow: 0 0 10px #ff00de, 0 0 20px #00ffff;
+            font-family: 'Dancing Script', cursive;
+            font-size: 4em;
+            margin-bottom: 20px;
+            background: linear-gradient(45deg, #ff00de, #00ffff, #ff00de);
+            background-size: 200% 200%;
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: textShimmer 3s ease-in-out infinite;
+            text-shadow: 0 0 30px rgba(255, 0, 222, 0.5);
         }
 
-        footer p {
-            font-size: 0.9em;
-            color: #ccc;
+        @keyframes textShimmer {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+
+        header p {
+            font-size: 1.4em;
+            color: #00ffff;
+            text-shadow: 0 0 20px #00ffff;
+            animation: glow 2s ease-in-out infinite alternate;
+        }
+
+        @keyframes glow {
+            from { text-shadow: 0 0 20px #00ffff; }
+            to { text-shadow: 0 0 30px #00ffff, 0 0 40px #00ffff; }
         }
 
         .option-button {
             display: block;
-            margin: 20px auto;
-            padding: 15px 30px;
+            margin: 25px auto;
+            padding: 20px 40px;
             background: linear-gradient(135deg, #ff00de, #00ffff);
             color: white;
             text-decoration: none;
-            border-radius: 30px;
-            font-size: 1.2em;
-            transition: all 0.4s ease;
-            text-shadow: 0 0 5px #000;
-            width: 220px;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            border-radius: 50px;
+            font-size: 1.3em;
+            font-weight: 600;
+            transition: all 0.5s ease;
+            text-shadow: 0 0 10px #000;
+            width: 280px;
+            box-shadow: 
+                0 8px 25px rgba(0, 0, 0, 0.3),
+                0 0 25px rgba(255, 0, 222, 0.4),
+                inset 0 0 25px rgba(255, 255, 255, 0.1);
             position: relative;
             overflow: hidden;
+            border: 2px solid rgba(255, 255, 255, 0.2);
         }
 
         .option-button:before {
@@ -90,8 +233,11 @@
             left: -100%;
             width: 100%;
             height: 100%;
-            background: rgba(255, 255, 255, 0.2);
-            transition: all 0.4s ease;
+            background: linear-gradient(90deg, 
+                transparent, 
+                rgba(255, 255, 255, 0.4), 
+                transparent);
+            transition: all 0.6s ease;
             transform: skewX(-45deg);
         }
 
@@ -100,70 +246,249 @@
         }
 
         .option-button:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+            transform: translateY(-8px) scale(1.05);
+            box-shadow: 
+                0 15px 35px rgba(0, 0, 0, 0.4),
+                0 0 50px rgba(255, 0, 222, 0.6),
+                0 0 70px rgba(0, 255, 255, 0.4);
+            background: linear-gradient(135deg, #ff00de, #00ffff, #ff00de);
+            background-size: 200% 200%;
+            animation: buttonPulse 0.6s ease-in-out;
         }
 
-        /* Стили для канваса */
+        @keyframes buttonPulse {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+
+        /* Звездное небо улучшенное */
         canvas {
             position: absolute;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            z-index: 0; /* Убедитесь, что канвас ниже других элементов */
+            z-index: -3;
         }
 
-        /* Стили для баннера */
         .banner {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
-            background-color: #ff00de;
+            background: linear-gradient(90deg, #ff00de, #00ffff, #ff00de);
+            background-size: 200% 200%;
+            animation: bannerShimmer 3s ease-in-out infinite;
             color: white;
             text-align: center;
-            padding: 10px 0;
-            z-index: 10000; /* Убедитесь, что баннер выше других элементов */
-            overflow: hidden; /* Скрываем текст, выходящий за пределы баннера */
+            padding: 15px 0;
+            z-index: 10000;
+            overflow: hidden;
+            box-shadow: 0 5px 25px rgba(255, 0, 222, 0.5);
+        }
+
+        @keyframes bannerShimmer {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
         }
 
         .banner-text {
             display: inline-block;
             white-space: nowrap;
-            animation: scroll-left 10s linear infinite;
+            animation: scroll-left 12s linear infinite;
+            font-weight: bold;
+            font-size: 1.1em;
+            text-shadow: 0 0 10px rgba(0, 0, 0, 0.8);
         }
 
         @keyframes scroll-left {
-            from {
-                transform: translateX(100%);
-            }
-            to {
-                transform: translateX(-100%);
-            }
+            from { transform: translateX(100%); }
+            to { transform: translateX(-100%); }
+        }
+
+        /* Магические кристаллы */
+        .crystal {
+            position: fixed;
+            width: 20px;
+            height: 20px;
+            background: linear-gradient(45deg, #ff00de, #00ffff);
+            transform: rotate(45deg);
+            animation: crystalFloat 6s ease-in-out infinite;
+            opacity: 0.8;
+            z-index: -1;
+        }
+
+        .crystal:before {
+            content: '';
+            position: absolute;
+            top: -10px;
+            left: 5px;
+            width: 10px;
+            height: 10px;
+            background: inherit;
+            transform: rotate(45deg);
+        }
+
+        @keyframes crystalFloat {
+            0%, 100% { transform: rotate(45deg) translateY(0px); }
+            50% { transform: rotate(45deg) translateY(-20px); }
+        }
+
+        /* Звуковые эффекты кнопки */
+        .sound-button {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: linear-gradient(45deg, #ff00de, #00ffff);
+            border: none;
+            border-radius: 50%;
+            width: 60px;
+            height: 60px;
+            cursor: pointer;
+            z-index: 10001;
+            box-shadow: 0 0 20px rgba(255, 0, 222, 0.5);
+            transition: all 0.3s ease;
+        }
+
+        .sound-button:hover {
+            transform: scale(1.1);
+            box-shadow: 0 0 30px rgba(255, 0, 222, 0.8);
+        }
+
+        footer p {
+            font-size: 1.1em;
+            color: #ccc;
+            text-shadow: 0 0 15px #00ffff;
+            animation: footerGlow 3s ease-in-out infinite alternate;
+        }
+
+        @keyframes footerGlow {
+            from { color: #ccc; }
+            to { color: #00ffff; }
+        }
+
+        /* Адаптивность */
+        @media (max-width: 768px) {
+            .container { padding: 20px; }
+            header h1 { font-size: 2.5em; }
+            .option-button { width: 240px; font-size: 1.1em; }
         }
     </style>
+    
     <script>
+        // Магический курсор
+        document.addEventListener('DOMContentLoaded', function() {
+            const cursor = document.createElement('div');
+            cursor.className = 'magic-cursor';
+            document.body.appendChild(cursor);
+
+            let mouseX = 0, mouseY = 0;
+            let cursorX = 0, cursorY = 0;
+
+            document.addEventListener('mousemove', (e) => {
+                mouseX = e.clientX;
+                mouseY = e.clientY;
+
+                // Создаем след
+                const trail = document.createElement('div');
+                trail.className = 'cursor-trail';
+                trail.style.left = mouseX + 'px';
+                trail.style.top = mouseY + 'px';
+                document.body.appendChild(trail);
+
+                setTimeout(() => {
+                    document.body.removeChild(trail);
+                }, 1000);
+            });
+
+            // Плавное движение курсора
+            function updateCursor() {
+                cursorX += (mouseX - cursorX) * 0.1;
+                cursorY += (mouseY - cursorY) * 0.1;
+                cursor.style.left = cursorX + 'px';
+                cursor.style.top = cursorY + 'px';
+                requestAnimationFrame(updateCursor);
+            }
+            updateCursor();
+        });
+
+        // Звуковые эффекты
+        let audioContext;
+        let soundEnabled = true;
+
+        function initAudio() {
+            audioContext = new (window.AudioContext || window.webkitAudioContext)();
+        }
+
+        function playMagicSound(frequency = 800, duration = 200) {
+            if (!soundEnabled || !audioContext) return;
+            
+            const oscillator = audioContext.createOscillator();
+            const gainNode = audioContext.createGain();
+            
+            oscillator.connect(gainNode);
+            gainNode.connect(audioContext.destination);
+            
+            oscillator.frequency.setValueAtTime(frequency, audioContext.currentTime);
+            oscillator.frequency.exponentialRampToValueAtTime(frequency * 2, audioContext.currentTime + duration / 1000);
+            
+            gainNode.gain.setValueAtTime(0.1, audioContext.currentTime);
+            gainNode.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + duration / 1000);
+            
+            oscillator.start(audioContext.currentTime);
+            oscillator.stop(audioContext.currentTime + duration / 1000);
+        }
+
+        function toggleSound() {
+            soundEnabled = !soundEnabled;
+            const button = document.querySelector('.sound-button');
+            button.innerHTML = soundEnabled ? '🔊' : '🔇';
+        }
+
         // Показать баннер после загрузки страницы
         window.addEventListener('load', () => {
             const banner = document.getElementById('prizeBanner');
             banner.style.display = 'block';
+            
+            // Инициализация аудио
+            document.addEventListener('click', initAudio, { once: true });
         });
     </script>
 </head>
 
 <body>
+    <div class="aurora"></div>
+    <div class="magic-particles" id="magicParticles"></div>
+    
     <canvas id="starCanvas"></canvas>
-    <div id="loader" class="loader"></div> <!-- Анимация загрузки -->
+    <div id="loader" class="loader"></div>
+    
+    <!-- Кнопка звука -->
+    <button class="sound-button" onclick="toggleSound()" title="Переключить звук">🔊</button>
+    
     <div class="container">
         <header>
             <h1>Врата Судьбы</h1>
-            <p>Выберите направление вашего вопроса</p>
+            <p>✨ Выберите направление вашего магического путешествия ✨</p>
         </header>
 
-        <a class="option-button" href="нумерология_онлайн.html">Отношения</a>
-        <a class="option-button" href="нумерология_онлайн.html">Бизнес</a>
-        <a class="option-button" href="нумерология_онлайн.html">Здоровье</a>
+        <a class="option-button" href="нумерология_онлайн.html" 
+           onmouseover="playMagicSound(600, 300)" 
+           onclick="playMagicSound(800, 400)">
+           🔮 Отношения
+        </a>
+        
+        <a class="option-button" href="нумерология_онлайн.html" 
+           onmouseover="playMagicSound(700, 300)" 
+           onclick="playMagicSound(900, 400)">
+           💼 Бизнес
+        </a>
+        
+        <a class="option-button" href="нумерология_онлайн.html" 
+           onmouseover="playMagicSound(800, 300)" 
+           onclick="playMagicSound(1000, 400)">
+           🌿 Здоровье
+        </a>
 
         <!-- Yandex.RTB R-A-13708510-1 -->
         <script>
@@ -177,17 +502,18 @@
         </script>
 
         <footer>
-            <p>Помните: судьба - это путь, который вы выбираете сами</p>
+            <p>🌟 Помните: судьба - это магический путь, который вы выбираете сами 🌟</p>
         </footer>
     </div>
 
     <div id="prizeBanner" class="banner">
         <a href="https://chubuk00ru.netlify.app/" class="banner-text" style="color: white; text-decoration: none;">
-            Бонус!
+            ⭐ Магический Бонус! ⭐
         </a>
     </div>
 
     <script>
+        // Улучшенные звезды с мерцанием
         const canvas = document.getElementById('starCanvas');
         const ctx = canvas.getContext('2d');
 
@@ -199,17 +525,33 @@
         window.addEventListener('resize', resizeCanvas);
 
         const stars = [];
+        const shootingStars = [];
 
         function createStars() {
-            const starCount = window.innerWidth < 600 ? 100 : 200;
+            const starCount = window.innerWidth < 600 ? 150 : 300;
             for (let i = 0; i < starCount; i++) {
                 stars.push({
                     x: Math.random() * canvas.width,
                     y: Math.random() * canvas.height,
-                    radius: Math.random() * 2 + 1,
+                    radius: Math.random() * 3 + 1,
                     speed: Math.random() * 0.5 + 0.1,
                     direction: Math.random() * 2 * Math.PI,
-                    alpha: Math.random() * 0.5 + 0.5
+                    alpha: Math.random() * 0.8 + 0.2,
+                    twinkle: Math.random() * 2 * Math.PI,
+                    color: Math.random() > 0.5 ? 'rgba(255, 0, 222,' : 'rgba(0, 255, 255,'
+                });
+            }
+        }
+
+        function createShootingStar() {
+            if (Math.random() < 0.005) {
+                shootingStars.push({
+                    x: Math.random() * canvas.width,
+                    y: 0,
+                    speedX: (Math.random() - 0.5) * 10,
+                    speedY: Math.random() * 5 + 5,
+                    life: 1,
+                    decay: 0.02
                 });
             }
         }
@@ -218,22 +560,59 @@
             for (let star of stars) {
                 star.x += Math.cos(star.direction) * star.speed;
                 star.y += Math.sin(star.direction) * star.speed;
+                star.twinkle += 0.02;
 
                 if (star.x > canvas.width || star.x < 0 || star.y > canvas.height || star.y < 0) {
                     star.x = Math.random() * canvas.width;
                     star.y = Math.random() * canvas.height;
                 }
             }
+
+            // Обновляем падающие звезды
+            for (let i = shootingStars.length - 1; i >= 0; i--) {
+                const star = shootingStars[i];
+                star.x += star.speedX;
+                star.y += star.speedY;
+                star.life -= star.decay;
+
+                if (star.life <= 0 || star.y > canvas.height) {
+                    shootingStars.splice(i, 1);
+                }
+            }
+
+            createShootingStar();
         }
 
         function drawStars() {
             ctx.clearRect(0, 0, canvas.width, canvas.height);
+            
+            // Рисуем обычные звезды
             for (let star of stars) {
+                const twinkleAlpha = (Math.sin(star.twinkle) + 1) / 2;
                 ctx.beginPath();
                 ctx.arc(star.x, star.y, star.radius, 0, Math.PI * 2);
-                ctx.fillStyle = `rgba(255, 255, 255, ${star.alpha})`;
+                ctx.fillStyle = star.color + (star.alpha * twinkleAlpha) + ')';
                 ctx.fill();
+                
+                // Добавляем свечение
+                ctx.shadowBlur = 10;
+                ctx.shadowColor = star.color + '0.8)';
             }
+
+            // Рисуем падающие звезды
+            for (let star of shootingStars) {
+                ctx.beginPath();
+                ctx.moveTo(star.x, star.y);
+                ctx.lineTo(star.x - star.speedX * 5, star.y - star.speedY * 5);
+                ctx.strokeStyle = `rgba(255, 255, 255, ${star.life})`;
+                ctx.lineWidth = 2;
+                ctx.stroke();
+                
+                ctx.shadowBlur = 15;
+                ctx.shadowColor = '#ffffff';
+            }
+            
+            ctx.shadowBlur = 0;
         }
 
         function animateStars() {
@@ -245,13 +624,68 @@
         createStars();
         animateStars();
 
+        // Создание магических частиц
+        function createMagicParticles() {
+            const container = document.getElementById('magicParticles');
+            
+            for (let i = 0; i < 50; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'particle';
+                particle.style.left = Math.random() * 100 + '%';
+                particle.style.width = particle.style.height = (Math.random() * 8 + 4) + 'px';
+                particle.style.animationDelay = Math.random() * 8 + 's';
+                particle.style.animationDuration = (Math.random() * 10 + 8) + 's';
+                container.appendChild(particle);
+            }
+        }
+
+        // Создание кристаллов
+        function createCrystals() {
+            for (let i = 0; i < 15; i++) {
+                const crystal = document.createElement('div');
+                crystal.className = 'crystal';
+                crystal.style.left = Math.random() * 100 + '%';
+                crystal.style.top = Math.random() * 100 + '%';
+                crystal.style.animationDelay = Math.random() * 6 + 's';
+                document.body.appendChild(crystal);
+            }
+        }
+
         // Скрываем загрузчик после загрузки страницы
         window.addEventListener('load', () => {
             const loader = document.getElementById('loader');
-            loader.style.display = 'none'; // Скрываем загрузчик после загрузки страницы
+            setTimeout(() => {
+                loader.style.display = 'none';
+            }, 2000);
+            
+            createMagicParticles();
+            createCrystals();
+        });
+
+        // Интерактивные созвездия
+        document.addEventListener('mousemove', (e) => {
+            if (Math.random() < 0.3) {
+                const sparkle = document.createElement('div');
+                sparkle.style.position = 'fixed';
+                sparkle.style.left = e.clientX + 'px';
+                sparkle.style.top = e.clientY + 'px';
+                sparkle.style.width = '6px';
+                sparkle.style.height = '6px';
+                sparkle.style.background = Math.random() > 0.5 ? '#ff00de' : '#00ffff';
+                sparkle.style.borderRadius = '50%';
+                sparkle.style.pointerEvents = 'none';
+                sparkle.style.zIndex = '9998';
+                sparkle.style.animation = 'trailFade 1.5s ease-out forwards';
+                document.body.appendChild(sparkle);
+
+                setTimeout(() => {
+                    if (document.body.contains(sparkle)) {
+                        document.body.removeChild(sparkle);
+                    }
+                }, 1500);
+            }
         });
     </script>
 </body>
 
 </html>
-
